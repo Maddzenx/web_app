@@ -7,35 +7,81 @@
   <link rel="stylesheet" type="text/css" href="main.css" />
 </head>
 <body>
-  <div class="d-flex align-items-start flex-row">
-    <div class="d-flex align-items-start flex-column bg-dark w-25px" style="height: 500px;">
-      <div class="p-2">
-        <button type="button" class="btn btn-success ">profile</button>
-      </div>
-      <div class="mt-auto p-3">
-        <button type="button" class="btn btn-success">idk</button>
-      </div>
-    </div>
-    <div class="d-flex align-items-start flex-column w-75">
-      <div class="d-flex justify-content-end bg-light w-75" style="height: 70px;">
+
+  <style>
+      
+      .bg-image{
+          background-color: #57B1B0;
+        }
+       .listBorder{
+         border-color: #57B1B0;
+         border-width: 2px;
+         border-radius: 5px;
+       } 
+        
+
+  </style>
+
+  <section class="vh-100">
+    <div class="d-flex align-items-start flex-row">
+      <nav class="fixed-left d-flex flex-column bg-image vh-100">
         <div class="p-2">
-          <button type="button" class="btn btn-success">filter</button>
+          <button type="button" class="btn btn-secondary">profile</button>
+        </div>
+        <div class="mt-auto p-2">
+          <button type="button" class="btn btn-secondary">log out</button>
+        </div>
+      </nav>
+      <div class="d-flex align-items-start flex-column w-100 vh-100">
+        <div class="d-flex justify-content-end w-100 vh-25">
+          <div class="p-2">
+            <button type="button" class="btn bg-image text-white">filter</button>
+          </div>
+        </div>
+        <div class="d-flex flex-column w-100 vh-100">
+          <div class="listContainer">
+            <ul class="p-2 gap-2 list-group">
+              <a href="#" class="list-group-item list-group-item-action listBorder">
+                <div class="d-flex flex-row">  
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Caller 1
+                    </label>
+
+                  </div>
+                </div> 
+              </a>
+              <a href="#" class="list-group-item list-group-item-action listBorder"><div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Caller 2
+                </label>
+              </div>
+            </a>
+              <a href="#" class="list-group-item list-group-item-action listBorder"><div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Caller 3
+                </label>
+              </div>
+            </a>
+              <a href="#" class="list-group-item list-group-item-action listBorder">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Caller 4
+                  </label>
+                </div>
+              </a>
+          </ul>
+        </div>
+        <div class="mt-auto p-5 text-center">
+          <button type="button" class="btn btn-secondary text-center"> + </button>
+        </div>
         </div>
       </div>
-      <div class="d-flex flex-column w-75" style="height: 430px;">
-        <div class="listContainer">
-          <ul class="p-2 gap-2 list-group">
-            <li class="list-group-item">List 1</li>
-            <li class="list-group-item">List 2</li>
-            <li class="list-group-item">List 3</li>
-            <li class="list-group-item">List 4</li>
-        </ul>
-      </div>
-      <div class="mt-auto p-2 text-center">
-        <button type="button" class="btn btn-light">+</button>
-      </div>
-      </div>
     </div>
-  </div>
+  </section>
 </body>
 </html>
