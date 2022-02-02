@@ -9,39 +9,25 @@
 </head>
 <body>
 
-  <style>
-      
-      .bg-image{
-          background-color: #57B1B0;
-        }
-       .listBorder{
-         border-color: #57B1B0;
-         border-radius: 2px;
-         border-style: solid;
-         
-       } 
-        
-
-  </style>
-
   <section class="vh-100">
     <div class="d-flex align-items-start flex-row">
-      <nav class="fixed-left d-flex flex-column bg-image vh-100">
-        <div class="p-2">
-          <button type="button" class="btn btn-secondary">profile</button>
-        </div>
-        <div class="mt-auto p-2">
-          <a class="btn btn-secondary rounded-pill" href="index.html" role="button">Sign out</a>
-          <button type="button" class="btn btn-secondary"aria-label="Left Align">
-            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+      <nav class="leftMenu fixed-left d-flex flex-column vh-100">
+        <div class="d-flex flex-column p-3 align-items-center">
+          <button type="button" class="profileBtn btn btn-secondary rounded-pill" aria-label="Left Align">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
           </button>
+        </div>
+        <div class="mt-auto d-flex flex-column p-3 align-items-center">
+          <a class="logOutBtn btn btn-secondary rounded-pill" aria-label="Left Align" href="index.html" role="button">
+            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+          </a>
         </div>
       </nav>
       <div class="d-flex align-items-start flex-column w-100 vh-100">
-        <div class="d-flex justify-content-end w-100 vh-25">
-          <div class="p-2">
+        <div class="rightSideDashboard d-flex justify-content-end w-100 vh-25">
+          <div class="p-3">
             <div class="dropdown">
-              <button class="btn bg-image text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button class="filterBtn btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 filter
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -52,51 +38,109 @@
             </div>
           </div>
         </div>
-        <div class="d-flex flex-column w-100 vh-100">
+        <div class="rightSideDashboard d-flex flex-column w-100 vh-100">
+          <h2 class="text-center">Call List 1</h2>
           <div class="listContainer">
-            <h2 class="text-center">Call List 1</h2>
             <ul class="p-2 gap-2 list-group">
-              <a href="#" class="list-group-item list-group-item-action listBorder">
-                <div class="d-flex flex-row">  
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
-                    <label class="form-check-label" for="flexCheckDefault">
-                      Caller 1
-                    </label>
+              <div class="d-flex flex-row">
+                <a href="#" class="list-group-item list-group-item-action callListBorder">
+                  <div class="d-flex flex-row">  
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
+                      <label class="callerLabel form-check-label" for="flexCheckDefault">
+                        Caller 1
+                      </label>
+                    </div>
+                  </div> 
+                </a>
+                <div class="dropdown">
+                  <button class="statusBtn btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    status
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">success</a>
+                    <a class="dropdown-item" href="#">call later</a>
+                    <a class="dropdown-item" href="#">no answer</a>
                   </div>
-                </div> 
-              </a>
-              <a href="#" class="list-group-item list-group-item-action listBorder"><div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                  Caller 2
-                </label>
-              </div>
-            </a>
-              <a href="#" class="list-group-item list-group-item-action listBorder"><div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                  Caller 3
-                </label>
-              </div>
-            </a>
-              <a href="#" class="list-group-item list-group-item-action listBorder">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                  <label class="form-check-label" for="flexCheckDefault">
-                    Caller 4
-                  </label>
                 </div>
-              </a>
+              </div>
+              <div class="d-flex flex-row">
+                <a href="#" class="list-group-item list-group-item-action callListBorder">
+                  <div class="d-flex flex-row">  
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
+                      <label class="callerLabel form-check-label" for="flexCheckDefault">
+                        Caller 2
+                      </label>
+                    </div>
+                  </div> 
+                </a>
+                <div class="dropdown">
+                  <button class="statusBtn btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    status
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">success</a>
+                    <a class="dropdown-item" href="#">call later</a>
+                    <a class="dropdown-item" href="#">no answer</a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-row">
+                <a href="#" class="list-group-item list-group-item-action callListBorder">
+                  <div class="d-flex flex-row">  
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
+                      <label class="callerLabel form-check-label" for="flexCheckDefault">
+                        Caller 3
+                      </label>
+                    </div>
+                  </div> 
+                </a>
+                <div class="dropdown">
+                  <button class="statusBtn btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    status
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">success</a>
+                    <a class="dropdown-item" href="#">call later</a>
+                    <a class="dropdown-item" href="#">no answer</a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-row">
+                <a href="#" class="list-group-item list-group-item-action callListBorder">
+                  <div class="d-flex flex-row">  
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
+                      <label class="callerLabel form-check-label" for="flexCheckDefault">
+                        Caller 4
+                      </label>
+                    </div>
+                  </div> 
+                </a>
+                <div class="dropdown">
+                  <button class="statusBtn btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    status
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">success</a>
+                    <a class="dropdown-item" href="#">call later</a>
+                    <a class="dropdown-item" href="#">no answer</a>
+                  </div>
+                </div>
+              </div>
           </ul>
         </div>
-        <div class="mt-auto p-5 text-center">
-          <button type="button" class="btn btn-secondary text-center"> + </button>
+        <div class="mt-auto p-3 text-center">
+          <button class="addBtn btn btn-secondary rounded-pill"> + </button>
         </div>
         </div>
       </div>
     </div>
   </section>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>
 </html>

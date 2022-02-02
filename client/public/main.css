@@ -1,9 +1,10 @@
 .leftMenu {
     background-color: #57B1B0;
+    width: 5%;
 }
 
 .rightSideDashboard {
-    background-color: #C4C4C4;
+    background-color: #ffffff;
 }
 
 .btn-success {
@@ -25,4 +26,33 @@
     cursor: pointer;
     color: rgb(78, 78, 78) !important;
 
+}
+
+/**callListPage**/
+.callListBorder{
+    border-color: #57B1B0;
+    border-radius: 2px;
+    border-style: solid;
+  } 
+
+.logOutBtn {
+    font-size: 15px;
+}
+
+.profileBtn{
+    font-size: 15px;
+}
+
+.filterBtn{
+    color: white;
+    background-color: #57B1B0;
+    font-size: 15px;
+}
+
+.addBtn{
+    font-size: 15px;
+}
+
+.callerLabel{
+    font-size: medium;
 }
