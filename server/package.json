@@ -1,0 +1,32 @@
+{
+  "name": "web_app",
+  "version": "1.0.0",
+  "description": "server folder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maddzenx/web_app.git"
+  },
+  "author": "Jesper Bergquist, Madeleine Xia, Salvija Zelvyte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maddzenx/web_app/issues"
+  },
+  "homepage": "https://github.com/Maddzenx/web_app#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^17.0.14",
+    "@types/supertest": "^2.0.11",
+    "jest": "^27.4.7",
+    "supertest": "^6.2.2",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.5"
+  }
+}
