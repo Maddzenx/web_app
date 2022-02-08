@@ -13,5 +13,6 @@ enum Status {
     Success,
     CallLater,
     NotInterested,
-    NoAnswer
+    NoAnswer,
+    NoStatus
   }
