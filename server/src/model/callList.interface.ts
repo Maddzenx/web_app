@@ -4,6 +4,6 @@ import { User } from "./user.interface";
 export interface CallList {
     id: number;
     creator: User;
-    contacts: Contact;
+    contacts: Array<Contact>;
     decription: string;
 }
