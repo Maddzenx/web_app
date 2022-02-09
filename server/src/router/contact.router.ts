@@ -186,6 +186,32 @@ contactRouter.get("/", async (req: Request, res: Response) => {
     }
    });
 
+   contactRouter.delete("/:id", async (req : Request, res: Response) => {
+
+    try {
+   
+        const id: number = req.body.id;
+        
+        if (! id) {
+        
+        res.status(400).send("Missing id\n");
+        
+        return;
+        
+        }
+
+    const contact : boolean = await ContactService.deleteContact(id);
+
+    res.status(201).send(contact);
+   
+    } catch (e : any) {
+   
+    res.status(500).send(e.message);
+   
+    }
+
+   });
+
 
    //Checking markSuccess
 
