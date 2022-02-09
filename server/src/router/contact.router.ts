@@ -165,6 +165,16 @@ contactRouter.get("/", async (req: Request, res: Response) => {
     
     }
 
+    const status: number = req.body.status;
+        
+    if (! status) {
+    
+    res.status(400).send("Missing status\n");
+    
+    return;
+    
+    }
+
     const comment: string = req.body.comment;
         
     if (! comment) {
