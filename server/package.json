@@ -4,8 +4,8 @@
   "description": "server folder",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts"
+   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Maddzenx/web_app.git"
