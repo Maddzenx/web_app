@@ -175,7 +175,7 @@ contactRouter.get("/", async (req: Request, res: Response) => {
     
     }
    
-    const contact : Contact = await ContactService.editContact(id, name, company, position, telephoneNumber, email, comment);
+    const contact : Contact = await ContactService.editContact(id, name, company, position, telephoneNumber, email, status, comment);
    
     res.status(201).send(contact);
    

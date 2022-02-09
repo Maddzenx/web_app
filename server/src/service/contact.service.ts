@@ -1,3 +1,4 @@
+import { Stats } from "fs";
 import { Contact } from "../model/contact.interface";
 
 // In-Memory Store
@@ -23,7 +24,7 @@ export const createContact = async (name: string, company: string, position: str
  return contacts[id];
 }
 
-export const editContact = async (id:number, name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string) : Promise<Contact> => {
+export const editContact = async (id:number, name: string, company: string, position: string, telephoneNumber: string, email: string, status: number, comment: string) : Promise<Contact> => {
     contacts[id] = {
        id: id,
        name: name,
@@ -31,7 +32,7 @@ export const editContact = async (id:number, name: string, company: string, posi
        position: position,
        telephoneNumber: telephoneNumber,
        email: email,
-       status: 4,  // Fixa senare, kommer sätta till no status varje gång en editar
+       status: status,  
        comment: comment
     };
     return contacts[id];
