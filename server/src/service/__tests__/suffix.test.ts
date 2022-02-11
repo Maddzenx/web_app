@@ -1,10 +1,9 @@
 // unit test
 
-import * as CS from "./contact.service";
-import { Contact } from "../model/contact.interface";
+import * as CS from "../contact.service";
+import { Contact } from "../../model/contact.interface";
 
 test("Creating a contact should return a contact with given arguments", () => {
-
     const contactService = new CS.ContactService({});
     return contactService.createContact("name", "company", "position", "telnumber", "email", "comment").then((contact : Contact) => {
         expect(contact.name).toEqual("name");
@@ -14,7 +13,9 @@ test("Creating a contact should return a contact with given arguments", () => {
         expect(contact.email).toEqual("email");
         expect(contact.comment).toEqual("comment");
     })
+   
 });
+
 
 
 
