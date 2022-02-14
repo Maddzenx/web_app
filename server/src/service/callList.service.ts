@@ -11,7 +11,7 @@ export const getCallList = async () : Promise<Array<CallList>> => {
     return Object.values(callLists);
 }
 
-export const createCallList = async (creator: User, contacts: Array<Contact>, decription: string) : Promise<CallList> => {
+export const createCallList = async (creator: string, contacts: Array<Contact["id"]>, decription: string) : Promise<CallList> => {
     const id = new Date().valueOf();
     callLists[id] = {
         id: id,
@@ -22,7 +22,7 @@ export const createCallList = async (creator: User, contacts: Array<Contact>, de
     return callLists[id];
 }
 
-export const editCallList = async (id:number, creator: User, contacts: Array<Contact>, decription: string) : Promise<CallList> => {
+export const editCallList = async (id:number, creator: string, contacts: Array<Contact["id"]>, decription: string) : Promise<CallList> => {
     callLists[id] = {
         id: id,
         creator: creator,
@@ -39,29 +39,12 @@ export const deleteCallList = async (id: number) : Promise<boolean> =>{
     return true;
 }
 
-export const addContact = async (callListId: number, name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string) : Promise<boolean> => {
+export const addContact = async (contactId : Contact["id"], callListId : CallList["id"]) : Promise<boolean> => {
     
-    const callList : CallList = callLists[callListId];
-    if (!callList) return false;
-    
-    const id = new Date().valueOf();
+    const contact : Contact = contacts[contactId];
+    if (contact) return false; //om contact redan är i list --> return false
 
-    contacts[id] = {
-       id: id,
-       name: name,
-       company: company,
-       position: position,
-       telephoneNumber: telephoneNumber,
-       email: email,
-       status: 4,
-       comment: comment
-    };
-
-    callList.contacts.push(contacts[id]);
+    callLists[callListId].contacts.push(contactId);
     
     return true;
-   }
-   
-
-//TODO
-//add contact to call list
+}
