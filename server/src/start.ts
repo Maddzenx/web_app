@@ -4,16 +4,14 @@
 
  */
 
-
-
  import express from "express";
 
 import { contactRouter } from "./router/contact.router";
+import * as cors from "cors";
+
 
 //import { callListRouter } from "./router/callList.router";
 
-
- 
  
  /**
  
@@ -22,10 +20,7 @@ import { contactRouter } from "./router/contact.router";
   */
  
  
- 
- 
  export const app = express();
- 
  
  
  /**
@@ -33,10 +28,11 @@ import { contactRouter } from "./router/contact.router";
   * App Configuration
  
   */
- 
- 
- 
+
+ app.use(cors());
  app.use(express.json());
+
+
 
  app.use("/contact", contactRouter);
  //app.use("/callList", callListRouter);

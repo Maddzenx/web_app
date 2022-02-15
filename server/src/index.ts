@@ -1,6 +1,5 @@
 import { app } from "./start";
-
-
+import * as cors from "cors";
 
 /**
 

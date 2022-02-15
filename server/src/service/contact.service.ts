@@ -1,36 +1,16 @@
 import { Stats } from "fs";
 import { Contact } from "../model/contact.interface";
 
-export interface IContactService {
-    getContact() : Promise<Array<Contact>>
-    createContact(name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string) : Promise<Contact>
-    editContact(id:number, name: string, company: string, position: string, telephoneNumber: string, email: string, status: number, comment: string) :  Promise<Contact>
-    markSuccess(id: number) : Promise<boolean>
-    markCallLater(id: number) : Promise<boolean>
-    markNotInterested(id: number) : Promise<boolean> 
-    markNoAnswer(id: number) : Promise<boolean> 
-    markNoStatus(id: number) : Promise<boolean>
-    deleteContact(id: number) : Promise<boolean> 
-}
-
-export class ContactService implements IContactService {
-    private contacts : { [key : number] : Contact };
-
-    constructor(contacts : { [key : number] : Contact }) {
-        this.contacts = contacts;
-    }
-
-
     // In-Memory Store
-    //const contacts : { [key: number]: Contact } = {};
+    const contacts : { [key: number]: Contact } = {};
 
-    getContact = async () : Promise<Array<Contact>> => {
-        return Object.values(this.contacts);
+    export const getContact = async () : Promise<Array<Contact>> => {
+        return Object.values(contacts);
     }
 
-    createContact = async (name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string) : Promise<Contact> => {
+    export const createContact = async (name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string) : Promise<Contact> => {
     const id = new Date().valueOf();
-    this.contacts[id] = {
+    contacts[id] = {
         id: id,
         name: name,
         company: company,
@@ -40,11 +20,11 @@ export class ContactService implements IContactService {
         status: 4,
         comment: comment
     };
-    return this.contacts[id];
+    return contacts[id];
     }
 
-    editContact = async (id:number, name: string, company: string, position: string, telephoneNumber: string, email: string, status: number, comment: string) : Promise<Contact> => {
-        this.contacts[id] = {
+    export const editContact = async (id:number, name: string, company: string, position: string, telephoneNumber: string, email: string, status: number, comment: string) : Promise<Contact> => {
+        contacts[id] = {
         id: id,
         name: name,
         company: company,
@@ -54,99 +34,54 @@ export class ContactService implements IContactService {
         status: status,  
         comment: comment
         };
-        return this.contacts[id];
+        return contacts[id];
     }
 
-    markSuccess = async (id: number) : Promise<boolean> =>{
+    export const markSuccess = async (id: number) : Promise<boolean> =>{
 
-        const contact : Contact = this.contacts[id];
+        const contact : Contact = contacts[id];
         if (! contact) return false;
         contact.status = 0;
-        this.contacts[id] = contact;
+        contacts[id] = contact;
         return true;
     }
 
-    markCallLater = async (id: number) : Promise<boolean> =>{
-        const contact : Contact = this.contacts[id];
+    export const markCallLater = async (id: number) : Promise<boolean> =>{
+        const contact : Contact = contacts[id];
         if (! contact) return false;
         contact.status = 1;
-        this.contacts[id] = contact;
+        contacts[id] = contact;
         return true;
     }
 
-    markNotInterested = async (id: number) : Promise<boolean> =>{
-        const contact : Contact = this.contacts[id];
+    export const markNotInterested = async (id: number) : Promise<boolean> =>{
+        const contact : Contact = contacts[id];
         if (! contact) return false;
         contact.status = 2;
-        this.contacts[id] = contact;
+        contacts[id] = contact;
         return true;
     }
 
-    markNoAnswer = async (id: number) : Promise<boolean> =>{
-        const contact : Contact = this.contacts[id];
+    export const markNoAnswer = async (id: number) : Promise<boolean> =>{
+        const contact : Contact = contacts[id];
         if (! contact) return false;
         contact.status = 3;
-        this.contacts[id] = contact;
+        contacts[id] = contact;
         return true;
     }
 
-    markNoStatus = async (id: number) : Promise<boolean> =>{
-        const contact : Contact = this.contacts[id];
+    export const markNoStatus = async (id: number) : Promise<boolean> =>{
+        const contact : Contact = contacts[id];
         if (! contact) return false;
         contact.status = 4;
-        this.contacts[id] = contact;
+        contacts[id] = contact;
         return true;
     }
 
-    deleteContact = async (id: number) : Promise<boolean> =>{
-        const contact : Contact = this.contacts[id];
+    export const deleteContact = async (id: number) : Promise<boolean> =>{
+        const contact : Contact = contacts[id];
         if (! contact) return false;
-        delete this.contacts[id];
+        delete contacts[id];
         return true;
     }
 
-}
-
-export function getContact(): Contact[] | PromiseLike<Contact[]> {
-    throw new Error("Function not implemented.");
-}
-
-
-export function createContact(name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string): Contact | PromiseLike<Contact> {
-    throw new Error("Function not implemented.");
-}
-
-
-export function editContact(id: number, name: string, company: string, position: string, telephoneNumber: string, email: string, status: number, comment: string): Contact | PromiseLike<Contact> {
-    throw new Error("Function not implemented.");
-}
-
-
-export function deleteContact(id: number): boolean | PromiseLike<boolean> {
-    throw new Error("Function not implemented.");
-}
-
-
-export function markSuccess(id: number): boolean | PromiseLike<boolean> {
-    throw new Error("Function not implemented.");
-}
-
-
-export function markCallLater(id: number): boolean | PromiseLike<boolean> {
-    throw new Error("Function not implemented.");
-}
-
-
-export function markNotInterested(id: number): boolean | PromiseLike<boolean> {
-    throw new Error("Function not implemented.");
-}
-
-
-export function markNoAnswer(id: number): boolean | PromiseLike<boolean> {
-    throw new Error("Function not implemented.");
-}
-
-
-export function markNoStatus(id: number): boolean | PromiseLike<boolean> {
-    throw new Error("Function not implemented.");
-}

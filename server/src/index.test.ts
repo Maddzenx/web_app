@@ -13,6 +13,6 @@ test("End-to-end test", async () => {
 
  expect(res.statusCode).toEqual(200);
 
- expect(res.body).toEqual({});
+ expect(res.body).toEqual([]);
 
 });

@@ -1,7 +1,7 @@
 import express, { Request, Response} from "express";
 import * as ContactService from "../service/contact.service";
-
 import { Contact } from "../model/contact.interface";
+
 
 export const contactRouter = express.Router();
 
