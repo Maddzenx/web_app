@@ -8,6 +8,8 @@
 
  import { contactRouter } from "./router/contact.router";
  import cors from "cors";
+ import { callListRouter } from "./router/callList.router";
+ import { userRouter } from "./router/user.router";
 
 
 //import { callListRouter } from "./router/callList.router";
@@ -35,4 +37,6 @@
 
 
  app.use("/contact", contactRouter);
- //app.use("/callList", callListRouter);
+ app.use("/callList", callListRouter);
+ app.use("/user", userRouter);
+
