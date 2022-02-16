@@ -6,8 +6,8 @@
 
  import express from "express";
 
-import { contactRouter } from "./router/contact.router";
-import * as cors from "cors";
+ import { contactRouter } from "./router/contact.router";
+ import cors from "cors";
 
 
 //import { callListRouter } from "./router/callList.router";
@@ -29,9 +29,9 @@ import * as cors from "cors";
  
   */
 
- app.use(cors());
- app.use(express.json());
 
+ app.use(express.json());
+ app.use(cors());
 
 
  app.use("/contact", contactRouter);

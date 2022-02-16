@@ -1,6 +1,8 @@
 import express, { Request, Response} from "express";
 import { CallList } from "../model/callList.interface";
 import { User } from "../model/user.interface";
+import * as UserService from "../service/user.service";
+
 
 export const userRouter = express.Router();
 
@@ -52,7 +54,7 @@ userRouter.put("/", async (req: Request, res: Response) => {
     
     }
    
-    const user : User = await userRouter.createUser(username, email, password, callLists);
+    const user : User = await UserService.createContact(username, email, password, callLists);
    
     res.status(201).send(user);
    

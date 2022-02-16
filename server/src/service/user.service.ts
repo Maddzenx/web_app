@@ -41,3 +41,7 @@ export const deleteUser = async (id: number) : Promise<boolean> =>{
 
     return true;
 }
+
+export function createContact(username: string, email: string, password: string, callLists: CallList[]): User | PromiseLike<User> {
+    throw new Error("Function not implemented.");
+}
