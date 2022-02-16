@@ -7,7 +7,7 @@ import * as UserService from "../service/user.service";
 export const userRouter = express.Router();
 
 
-userRouter.put("/", async (req: Request, res: Response) => {
+userRouter.post("/", async (req: Request, res: Response) => {
 
     try {
    
@@ -54,7 +54,7 @@ userRouter.put("/", async (req: Request, res: Response) => {
     
     }
    
-    const user : User = await UserService.createContact(username, email, password, callLists);
+    const user : User = await UserService.createUser(username, email, password, callLists);
    
     res.status(201).send(user);
    

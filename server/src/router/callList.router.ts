@@ -21,7 +21,7 @@ callListRouter.get("/", async (req: Request, res: Response) => {
    });
 
    /**get create call list**/
-   callListRouter.put("/", async (req: Request, res: Response) => {
+   callListRouter.post("/", async (req: Request, res: Response) => {
 
     try {
    

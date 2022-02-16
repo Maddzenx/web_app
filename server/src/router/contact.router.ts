@@ -20,7 +20,7 @@ contactRouter.get("/", async (req: Request, res: Response) => {
 
    /** test */
 
-   contactRouter.put("/", async (req: Request, res: Response) => {
+   contactRouter.post("/", async (req: Request, res: Response) => {
 
     try {
    
