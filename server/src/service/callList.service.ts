@@ -16,7 +16,7 @@ export const createCallList = async (creator: string, contacts: Array<Contact["i
     callLists[id] = {
         id: id,
         creator: creator,
-        contacts: contacts,
+        contacts: [],
         decription: decription
  };
     return callLists[id];
