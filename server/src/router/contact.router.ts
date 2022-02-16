@@ -224,134 +224,23 @@ contactRouter.get("/", async (req: Request, res: Response) => {
 
    });
 
-
-   //Checking markSuccess
-
-contactRouter.put("/:id", async (req : Request, res: Response) => {
-
-try {
-
-const id : number = parseInt(req.params.id, 10);
-
-
-
-if (! req.body.status[0]) {
-
-res.status(400).send("Bad call to /contact/:id\n");
-
-}
-
-
-const success : boolean = await ContactService.markSuccess(id);
-
-if (! success) {
-
-res.status(400).send(`Status is not success ${id}\n`);
-
-}
-
-
-
-res.status(200).send("Status set to success\n");
-
-} catch (e : any) {
-
-res.status(500).send(e.message);
-
-}
-
-});
-
-contactRouter.put("/:id", async (req : Request, res: Response) => {
-
-    try {
-    
-    const id : number = parseInt(req.params.id, 10);
-    
-    
-    
-    if (! req.body.status[1]) {
-    
-    res.status(400).send("Bad call to /contact/:id\n");
-    
-    }
-    
-    
-    const callLater : boolean = await ContactService.markCallLater(id);
-    
-    if (! callLater) {
-    
-    res.status(400).send(`Status is not call later ${id}\n`);
-    
-    }
-    
-    
-    
-    res.status(200).send("Status set to call later\n");
-    
-    } catch (e : any) {
-    
-    res.status(500).send(e.message);
-    
-    }
-    
-    });
-
-    //Checking markNotIntereste
-
-contactRouter.put("/:id", async (req : Request, res: Response) => {
-
-    try {
-    
-    const id : number = parseInt(req.params.id, 10);
-    
-    
-    
-    if (! req.body.status[2]) {
-    
-    res.status(400).send("Bad call to /contact/:id\n");
-    
-    }
-    
-    
-    const notInterested : boolean = await ContactService.markNotInterested(id);
-    
-    if (! notInterested) {
-    
-    res.status(400).send(`Status is not not interested ${id}\n`);
-    
-    }
-    
-    
-    
-    res.status(200).send("Status set to not interested\n");
-    
-    } catch (e : any) {
-    
-    res.status(500).send(e.message);
-    
-    }
-    
-    });
-
-        //Checking markNoAnswer
-
-    contactRouter.put("/:id", async (req : Request, res: Response) => {
+    //Checking changestatus
+    contactRouter.put("/:id, status", async (req : Request, res: Response) => {
 
         try {
         
         const id : number = parseInt(req.params.id, 10);
+        const status : number = parseInt(req.params.status, 4);
         
         
-        
-        if (! req.body.status[3]) {
+        if (! req.body.status[status]) {
         
         res.status(400).send("Bad call to /contact/:id\n");
         
         }
         
         
-        const noAnswer : boolean = await ContactService.markNoAnswer(id);
+        const noAnswer : boolean = await ContactService.changeStatus(id, status);
         
         if (! noAnswer) {
         
@@ -361,44 +250,7 @@ contactRouter.put("/:id", async (req : Request, res: Response) => {
         
         
         
-        res.status(200).send("Status set to no answer\n");
-        
-        } catch (e : any) {
-        
-        res.status(500).send(e.message);
-        
-        }
-        
-        });
-
-        //Checking markNoStatus
-
-    contactRouter.put("/:id", async (req : Request, res: Response) => {
-
-        try {
-        
-        const id : number = parseInt(req.params.id, 10);
-        
-        
-        
-        if (! req.body.status[4]) {
-        
-        res.status(400).send("Bad call to /contact/:id\n");
-        
-        }
-        
-        
-        const noStatus : boolean = await ContactService.markNoStatus(id);
-        
-        if (! noStatus) {
-        
-        res.status(400).send(`Status is not no status ${id}\n`);
-        
-        }
-        
-        
-        
-        res.status(200).send("Status set to no status\n");
+        res.status(200).send("Status set\n");
         
         } catch (e : any) {
         

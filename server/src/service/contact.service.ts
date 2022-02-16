@@ -37,43 +37,10 @@ import { Contact } from "../model/contact.interface";
         return contacts[id];
     }
 
-    export const markSuccess = async (id: number) : Promise<boolean> =>{
-
+    export const changeStatus = async (id: number, status: number) : Promise<boolean> =>{
         const contact : Contact = contacts[id];
         if (! contact) return false;
-        contact.status = 0;
-        contacts[id] = contact;
-        return true;
-    }
-
-    export const markCallLater = async (id: number) : Promise<boolean> =>{
-        const contact : Contact = contacts[id];
-        if (! contact) return false;
-        contact.status = 1;
-        contacts[id] = contact;
-        return true;
-    }
-
-    export const markNotInterested = async (id: number) : Promise<boolean> =>{
-        const contact : Contact = contacts[id];
-        if (! contact) return false;
-        contact.status = 2;
-        contacts[id] = contact;
-        return true;
-    }
-
-    export const markNoAnswer = async (id: number) : Promise<boolean> =>{
-        const contact : Contact = contacts[id];
-        if (! contact) return false;
-        contact.status = 3;
-        contacts[id] = contact;
-        return true;
-    }
-
-    export const markNoStatus = async (id: number) : Promise<boolean> =>{
-        const contact : Contact = contacts[id];
-        if (! contact) return false;
-        contact.status = 4;
+        contact.status = status;
         contacts[id] = contact;
         return true;
     }
