@@ -51,3 +51,10 @@ export const addContact = async (contactId : Contact["id"], callListId : CallLis
     
     return true;
 }
+
+export function makeCallListService(){
+    return ({
+
+    });
+
+}
