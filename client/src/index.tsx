@@ -4,8 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {CallList} from '../../server/src/model/callList.interface'
+import {Contact} from '../../server/src/model/contact.interface'
 import axios, { AxiosResponse } from "axios";
 import {Button, Row, Col, Container, Card} from 'react-bootstrap';
+
+class ContactComp extends React.Component<{name: string, status: number}> {
+  override render() {
+    return <li>
+        <h2>hej</h2>
+      </li>
+  }
+}
 
 class CallListComp extends React.Component<{},{callLists: CallList[]}>{
   constructor(props:{}){
@@ -16,7 +25,6 @@ class CallListComp extends React.Component<{},{callLists: CallList[]}>{
     ]
   };
 }
-
 
 override async componentDidMount(){
   const res : AxiosResponse<CallList[]> = await axios.get<CallList[]>("https://localhost:8080/callList");
