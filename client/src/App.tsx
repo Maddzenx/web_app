@@ -1,58 +1,28 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.svg';
-import {IoIosContact, IoIosLogOut} from "react-icons/io";
-import {Button, Row, Col, Container} from 'react-bootstrap';
 import './App.css';
 import { Contact } from '../../server/src/model/contact.interface';
-import { Status } from '../../server/src/model/contact.interface';
-import { CallList } from '../../server/src/model/callList.interface';
+import axios, { AxiosResponse } from 'axios';
+import CallList from "./components/callList";
+import { PleaseWait } from './components/pleaseWait';
 
+export class App extends React.Component<{}, {receivedContacts: boolean, contacts : Contact[]}> {
+  state = {receivedContacts : false, contacts : []};
 
-export interface IState{
-  contact:{
-    id: number;
-    name: string;
-    company: string;
-    position: string;
-    telephoneNumber: string;
-    email: string;
-    status: Status;
-    comment: string;
-  }[]
+  override async componentDidMount() {
+    this.refreshCallList();
+  
+  }
 
-  callList:{
-    id: number;
-    title: string;
-    creator: string;
-    contacts: Array<Contact["id"]>;
-    decription?: string;
-  }[]
+  private async refreshCallList() {
+    const res: AxiosResponse<Contact[]> = await axios.get<Contact[]>("http://localhost/8080/callList");
+    this.setState({ receivedContacts : true, contacts: res.data });
+}
 
-  user: {
-    username: string; /**unique**/
-    email: string;
-    password: string;
-    callLists: Array<CallList>;
-    /**team: Team; **/
+  override render() {
+    if (this.state.receivedContacts) return <CallList initialContacts = {this.state.contacts}
+      refreshCallList={() => this.refreshCallList()} />
+    else return <PleaseWait />
   }
 
 }
-
-function App() {
-
-  return (
-  <Container fluid>
-    <Row className="sideBar" sm={4}>
-      <Button className="profileBtn" variant="primary">
-          <IoIosContact/>
-      </Button>
-      <Button className="SignOunBtn fixed-bottom" variant="primary">
-          <IoIosLogOut/>
-      </Button>
-    </Row>
-  </Container>
-  );
-}
-
-export default App;
