@@ -9,7 +9,7 @@ export interface Contact {
     comment: string;
 }
 
-enum Status {
+export enum Status {
     Success,
     CallLater,
     NotInterested,

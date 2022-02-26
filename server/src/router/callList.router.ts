@@ -20,11 +20,20 @@ callListRouter.get("/", async (req: Request, res: Response) => {
    
    });
 
-   /**get create call list**/
+   /**create call list**/
    callListRouter.post("/", async (req: Request, res: Response) => {
 
     try {
+   const title: string = req.body.title;
    
+   
+    if (! title) {
+   
+    res.status(400).send("Missing title\n");
+   
+    return;
+   
+    }
     const creator: string = req.body.creator;
    
    
@@ -59,7 +68,7 @@ callListRouter.get("/", async (req: Request, res: Response) => {
     }
    
    
-    const callList : CallList = await CallListService.createCallList(creator, contacts, description);
+    const callList : CallList = await CallListService.createCallList(title, creator, contacts, description);
    
     res.status(201).send(callList);
    
@@ -84,6 +93,16 @@ callListRouter.get("/", async (req: Request, res: Response) => {
     
     return;
     
+    }
+    const title: string = req.body.creator;
+   
+   
+    if (! title) {
+   
+    res.status(400).send("Missing title\n");
+   
+    return;
+   
     }
     const creator: string = req.body.creator;
    
@@ -120,7 +139,7 @@ callListRouter.get("/", async (req: Request, res: Response) => {
   
 
    
-    const callList : CallList = await CallListService.editCallList(id, creator, contacts, decription);
+    const callList : CallList = await CallListService.editCallList(id, title, creator, contacts, decription);
    
     res.status(201).send(callList);
    

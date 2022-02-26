@@ -1,3 +1,4 @@
+import { stringify } from "querystring";
 import { CallList } from "../model/callList.interface";
 import { Contact } from "../model/contact.interface";
 import { User } from "../model/user.interface";
@@ -11,10 +12,11 @@ export const getCallList = async () : Promise<Array<CallList>> => {
     return Object.values(callLists);
 }
 
-export const createCallList = async (creator: string, contacts: Array<Contact["id"]>, decription: string) : Promise<CallList> => {
+export const createCallList = async (title: string, creator: string, contacts: Array<Contact["id"]>, decription: string) : Promise<CallList> => {
     const id = new Date().valueOf();
     callLists[id] = {
         id: id,
+        title: title,
         creator: creator,
         contacts: [],
         decription: decription
@@ -22,9 +24,10 @@ export const createCallList = async (creator: string, contacts: Array<Contact["i
     return callLists[id];
 }
 
-export const editCallList = async (id:number, creator: string, contacts: Array<Contact["id"]>, decription: string) : Promise<CallList> => {
+export const editCallList = async (id:number, title:string, creator: string, contacts: Array<Contact["id"]>, decription: string) : Promise<CallList> => {
     callLists[id] = {
         id: id,
+        title: title,
         creator: creator,
         contacts: contacts,
         decription: decription
