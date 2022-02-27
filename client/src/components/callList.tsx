@@ -2,7 +2,6 @@ import { Contact } from '../../../server/src/model/contact.interface';
 import React from 'react';
 import axios from "axios";
 import { CallListItem } from "./callListItem";
-import { IState as Props } from "../App";
 import { NewContactItemField } from "./newContactItemField"; // Något wierd med denna TODO
 
 interface CallListProps {

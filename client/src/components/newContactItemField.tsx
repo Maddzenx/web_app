@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function NewContactItemField(props: {addNewContact: (name: string) => void }) :  {
+export function NewContactItemField(props: { addNewContact: (name: string) => void }) { 
     const [name, setName] = useState("");
   
     return <li>

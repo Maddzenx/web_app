@@ -2,12 +2,23 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import axios, { AxiosResponse } from "axios";
-import { CallListComp } from './components/callListComp';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { App } from './App';
+import { CallListView } from './components/callListView';
+import { CallListPage } from './CallListPage';
 
-
-
-const rootElement = <CallListComp />
+const rootElement = <React.StrictMode>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<CallListPage />}>
+        <Route path="callListPage" element={<App />}>
+          <Route path="addContact" element={<p>Add new contact</p>} />
+          <Route path=":CallListId" element={<CallListView />} />
+        </Route>
+      </Route>      
+    </Routes>
+  </BrowserRouter>
+</React.StrictMode>
 
 ReactDOM.render(rootElement,
   document.getElementById('root')
