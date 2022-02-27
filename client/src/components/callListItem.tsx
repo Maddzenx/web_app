@@ -1,13 +1,14 @@
 import { Contact } from "../../../server/src/model/contact.interface";
 
+import { Link } from "react-router-dom";
+
+
 export function CallListItem(props:{
-    id: number;
-    title: string;
-    creator: string;
-    contacts: Array<Contact["id"]>;
-    decription?: string;
+   contact : Contact
+   handleCheck: () => void
   }) {
       return <li>
-        {props.title} {props.contacts} {props.decription}
-      </li>
+        <Link to={`/contact/${props.contact.id}`}>{props.contact.name}</Link>
+    </li>
+
   }

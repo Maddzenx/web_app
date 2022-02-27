@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function NewItemField(props: {addNewCallList: (title: string) => void }) {
+export function NewCallListItemField(props: {addNewCallList: (title: string) => void }) {
     const [title, setTitle] = useState("");
   
     return <li>

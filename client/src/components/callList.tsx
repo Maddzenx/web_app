@@ -1,26 +1,44 @@
+import { Contact } from '../../../server/src/model/contact.interface';
 import React from 'react';
+import axios from "axios";
+import { CallListItem } from "./callListItem";
 import { IState as Props } from "../App";
+import { NewContactItemField } from "./newContactItemField"; // Något wierd med denna TODO
 
-interface IProps {
-    callList: Props["callList"]
+interface CallListProps {
+    contacts : Contact[],
+    refreshCallList : () => void
 }
 
-const callList: React.FC<IProps> = ({callList}) => {
+export  class CallList extends React.Component<CallListProps, {}> {
+    constructor(props: CallListProps){
+    super(props);
 
-    const rendercallList = (): JSX.Element[] => {
-        return callList.map(callList => {
-            return (
-                <h2>{callList.title}</h2>
-
-            )
-        })
+    this.addNewContact = this.addNewContact.bind(this);
     }
 
-    return (
-        <ul>
-            {rendercallList()} 
-        </ul>
-    )
-}
+    private async markContactStatus(id: number) {
+        // TODO Extract hostname
+        await axios.put<never>("http://localhost:8080/contact/" + id,
+          { done: true }
+        );
+        this.props.refreshCallList();
+      }
+      private async addNewContact(name: string) {
+        await axios.put("http://localhost:8080/contact", { name: name });
+        this.props.refreshCallList();
+      }
+      override render() {
+        return <ul>
+        {this.props.contacts.map((contact: Contact) => (contact.status) ?
+          <CallListItem key={contact.id.toString()} contact={contact} handleCheck={() => { }} />
+          :
+          <CallListItem key={contact.id.toString()} contact={contact}
+            handleCheck={() => { this.markContactStatus(contact.id); }} />
+        )}
+        <NewContactItemField key="new item" addNewContact={this.addNewContact} />
+      </ul>
+      }
+    }
 
-export default callList
+
