@@ -7,7 +7,8 @@ import { CallListView } from './components/callListView';
 import { CallListPage } from './CallListPage';
 import { SideBar } from './components/sideBar';
 
-/*const rootElement = <React.StrictMode>
+
+const rootElement = <React.StrictMode>
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<SideBar/>}>
@@ -18,7 +19,7 @@ import { SideBar } from './components/sideBar';
       </Route>      
     </Routes>
   </BrowserRouter>
-</React.StrictMode>*/
+</React.StrictMode>
 
 ReactDOM.render(
   <BrowserRouter>
