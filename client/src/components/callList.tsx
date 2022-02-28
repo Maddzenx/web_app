@@ -19,7 +19,7 @@ export  class CallList extends React.Component<CallListProps, {}> {
     private async markContactStatus(id: number) {
         // TODO Extract hostname
         await axios.put<never>("http://localhost:8080/contact/" + id,
-          { done: true }
+          { done: true } //Lägg till status
         );
         this.props.refreshCallList();
       }
