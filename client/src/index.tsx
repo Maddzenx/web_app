@@ -5,33 +5,20 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { App } from './App';
 import { CallListView } from './components/callListView';
 import { CallListPage } from './CallListPage';
-import { SideBar } from './components/sideBar';
 
+import { StartPage } from './components/startPage'
 
 const rootElement = <React.StrictMode>
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<SideBar/>}>
-        <Route path="callListPage" element={<App />}>
-          <Route path="addContact" element={<p>Add new contact</p>} />
-          <Route path=":CallListId" element={<CallListView />} />
-        </Route>
+      <Route path="/" element={<StartPage/>}>
+
       </Route>      
     </Routes>
   </BrowserRouter>
 </React.StrictMode>
 
-ReactDOM.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<SideBar/>}>
-        <Route path="callListPage" element={<App />}>
-          <Route path="addContact" element={<p>Add new contact</p>} />
-          <Route path=":CallListId" element={<CallListView />} />
-          </Route>
-        </Route>      
-      </Routes>
-    </BrowserRouter>,
+ReactDOM.render(rootElement,
 
   document.getElementById('root')
 );

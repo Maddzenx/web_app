@@ -3,10 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './logo.svg';
 import {IoIosContact, IoIosLogOut} from "react-icons/io";
 import {Button, Row, Col, Container} from "react-bootstrap";
-import '././src/App.css';
+import '../App.css';
 
 export function SideBar() {
-    return (
+    return ( //add outlet
     <Container fluid>
       <Row className="sideBar" sm={4}>
         <Button className="profileBtn" variant="primary">
