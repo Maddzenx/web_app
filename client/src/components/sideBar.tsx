@@ -1,23 +1,32 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './logo.svg';
-import {IoIosContact, IoIosLogOut} from "react-icons/io";
-import {Button, Row, Col, Container} from "react-bootstrap";
+import { IoIosContact, IoIosLogOut } from "react-icons/io";
+import { Button, Row, Col, Container, Nav, Navbar } from "react-bootstrap";
 import '../App.css';
+import { Outlet } from 'react-router-dom';
+
 
 export function SideBar() {
-    return ( //add outlet
+  return (
+
     <Container fluid>
-      <Row className="sideBar" sm={4}>
-        <Button className="profileBtn" variant="primary">
-            <IoIosContact/>
-        </Button>
-        <Button className="SignOunBtn fixed-bottom" variant="primary">
-            <IoIosLogOut/>
-        </Button>
-      </Row>
+      <>
+        <Navbar bg="dark" variant="dark">
+          <Container>
+            <Navbar.Brand >Name</Navbar.Brand>
+            <Nav className="me-auto">
+              <Nav.Link href="startPage">Dashboard</Nav.Link> 
+              <Nav.Link href="callListPage">Profile</Nav.Link>
+              <Nav.Link href="#pricing">Sign Out</Nav.Link>
+            </Nav>
+          </Container>
+        </Navbar>
+      </>
+      <Outlet />
     </Container>
-    );
-  }
-  
-  export default SideBar;
+
+  );
+}
+
+export default SideBar;
