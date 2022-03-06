@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Contact } from '../../server/src/model/contact.interface';
 import axios, { AxiosResponse } from 'axios';
-import { PleaseWait } from './components/pleaseWait';
-import { CallList } from './components/callList';
+import { PleaseWait } from './Components/pleaseWait';
+import { CallList } from './Components/callList';
 
 export class App extends React.Component<{}, {receivedContacts: boolean, contacts : Contact[]}> {
   state = {receivedContacts : false, contacts : []};

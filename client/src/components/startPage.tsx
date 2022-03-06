@@ -11,7 +11,7 @@ export function StartPage(){
     return <div>
             <Link to="/callListPage">Go to a fake Call List
             </Link>
-            <Link to="/dashboardPage">Go to Dashboard
+            <Link to="/callListCard">Go to Dashboard
             </Link>
             <SideBar />
             <LogInPage/>
