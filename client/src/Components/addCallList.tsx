@@ -1,5 +1,5 @@
 import { ICallList } from "../interfaces";
-import '../callList.module.css'
+import styles from '../callList.module.css';
 
 interface Props {
     callList: ICallList;
@@ -9,8 +9,8 @@ interface Props {
 const AddCallList = ({ callList, deleteCallList }: Props) => {
 
     return (
-        <div className="callList">
-            <div className="content">
+        <div className={styles.callList}>
+            <div className={styles.content}>
                 <span>{callList.callListTitle}</span>
                 <span>{callList.callListDescription}</span>
             </div>

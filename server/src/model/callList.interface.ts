@@ -6,5 +6,5 @@ export interface CallList {
     title: string;
     creator: string;
     contacts: Array<Contact["id"]>;
-    decription?: string;
+    description?: string;
 }

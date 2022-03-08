@@ -4,7 +4,7 @@ import { SideBar } from './sideBar';
 import { Outlet } from 'react-router-dom';
 import { ICallList } from '../interfaces';
 import AddCallList from './addCallList';
-import '../callList.module.css'
+import styles from '../callList.module.css';
 
 const CallListCard: FC = () => {
 
@@ -29,21 +29,21 @@ const CallListCard: FC = () => {
     const deleteCallList = (callListTitleToDelete: string): void => {
         setCallList(
             callList.filter((title) => {
-                return title.callListTitle != callListTitleToDelete;
+                return title.callListTitle !== callListTitleToDelete;
             })
         );
     };
 
     return (
-        <div className="CallListCard">
+        <div className={styles.CallListCard}>
             <SideBar />
-            <div className="header"></div>
-            <div className="inputContainer">
+            <div className={styles.header}></div>
+            <div className={styles.inputContainer}>
                 <input type="text" placeholder="Name..." name="title" value={title} onChange={handleChange} />
                 <input type="text" placeholder="Description..." name="description" value={description} onChange={handleChange} />
             </div>
             <button onClick={addCallList}>Add Call List</button>
-            <div className="callLists">
+            <div className={styles.callLists}>
                 {callList.map((callList: ICallList, key: number) => {
                     return <AddCallList key={key} callList={callList} deleteCallList={deleteCallList} />;
                 })}
