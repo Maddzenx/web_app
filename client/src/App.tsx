@@ -22,7 +22,8 @@ export class App extends React.Component<{}, {receivedContacts: boolean, contact
   override render() {
     if (this.state.receivedContacts) return <CallList contacts = {this.state.contacts}
       refreshCallList={() => this.refreshCallList()} />
-    else return <PleaseWait />
+    else return <CallList contacts = {this.state.contacts}
+    refreshCallList={() => this.refreshCallList()} />
   }
 
 }

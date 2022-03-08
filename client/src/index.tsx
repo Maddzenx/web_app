@@ -5,10 +5,11 @@ import './App.css';
 import './callList.module.css'
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { StartPage } from './Components/startPage';
-import { CallListPage } from './Components/callListPage';
-import { ContactView } from './Components/contactView';
-import CallListCard from './Components/callListCard';
+import { StartPage } from './components/startPage';
+import SideBar from './components/sideBar';
+import { CallListPage } from './components/callListPage';
+import { ContactView } from './components/contactView';
+import { App } from './App';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,7 +17,7 @@ ReactDOM.render(
       <Routes>
       <Route path="/" element={<StartPage />}> 
       </Route>
-      <Route path="/callListPage" element={<CallListPage />}>
+      <Route path="/callListPage" element={<App />}>
           <Route path=":addContact" element={<p>addContactView</p>} />
           <Route path=":expandContact" element={<ContactView />} /> 
         </Route> 
