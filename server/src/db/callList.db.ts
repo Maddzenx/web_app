@@ -1,10 +1,13 @@
-import {Schema, Model} from "mongoose";
-import {CallList} from "../src/model/callList.interface";
-import {Contact} from "../src/model/contact.interface";
+import {Schema, Model, connect} from "mongoose";
+import {CallList} from "../model/callList.interface";
+import {Contact} from "../model/contact.interface";
 import { conn } from "./conn";
 
 
-const callListSchema : Schema = new Schema({
+export async function connectToCallListDB() : Promise<Model<CallList>> {
+   
+   const db = conn;
+   const callListSchema : Schema = new Schema({
 
  id : {
 
@@ -48,11 +51,10 @@ const callListSchema : Schema = new Schema({
 
  }
 
-});
+})
 
+return db.model<CallList>("CallList", callListSchema);
 
+}
 
-
-
-export const taskModel = conn.model<CallList>("CallList", callListSchema);
 

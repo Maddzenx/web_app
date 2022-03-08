@@ -1,15 +1,16 @@
-import express, { Request, Response} from "express";
-import * as CallListService from "../service/callList.service";
+import Express, { Request, Response} from "express";
 import { CallList } from "../model/callList.interface";
 import { Contact } from "../model/contact.interface";
+import { ICallListService } from "../../src/service/icallList.service";
 
-
-export const callListRouter = express.Router();
+export function makeCallListRouter(callListService : Promise<ICallListService>): Express.Express {
+    const callListRouter: Express.Express = Express();
 
 /**get calllist**/
-callListRouter.get("/", async (req: Request, res: Response) => {
+    callListRouter.get("/", async (req: Request, res: Response) => {
     try {
-        const callLists : Array<CallList> = await CallListService.getCallList();
+        const cl = await callListService;
+        const callLists : Array<CallList> = await cl.getCallList();
 
         res.status(200).send(callLists);
 
@@ -67,8 +68,8 @@ callListRouter.get("/", async (req: Request, res: Response) => {
     
     }
    
-   
-    const callList : CallList = await CallListService.createCallList(title, creator, contacts, description);
+    const cl = await callListService;
+    const callList : CallList = await cl.createCallList(title, creator, contacts, description);
    
     res.status(201).send(callList);
    
@@ -138,8 +139,8 @@ callListRouter.get("/", async (req: Request, res: Response) => {
     }
   
 
-   
-    const callList : CallList = await CallListService.editCallList(id, title, creator, contacts, decription);
+    const cl = await callListService;
+    const callList : CallList = await cl.editCallList(id, title, creator, contacts, decription);
    
     res.status(201).send(callList);
    
@@ -165,15 +166,16 @@ callListRouter.get("/", async (req: Request, res: Response) => {
         
         }
 
-    const callList : boolean = await CallListService.deleteCallList(id);
+        const cl = await callListService;    
+        const isDeleted : Boolean = await cl.deleteCallList(id);
 
-    res.status(201).send(callList);
+        res.status(201).send(isDeleted);
    
-    } catch (e : any) {
+        } catch (e : any) {
    
-    res.status(500).send(e.message);
+        res.status(500).send(e.message);
    
-    }
+        }
 
    });
 
@@ -206,7 +208,8 @@ callListRouter.get("/", async (req: Request, res: Response) => {
    
     }
    
-    const isAdded : Boolean = await CallListService.addContact(contactId, callListId);
+    const cl = await callListService;
+    const isAdded : CallList = await cl.addContact(callListId);
    
     res.status(201).send(isAdded);
    
@@ -217,3 +220,5 @@ callListRouter.get("/", async (req: Request, res: Response) => {
     }
    
    });
+   return callListRouter;
+}

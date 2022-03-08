@@ -1,60 +1,74 @@
-import { stringify } from "querystring";
 import { CallList } from "../model/callList.interface";
 import { Contact } from "../model/contact.interface";
-import { User } from "../model/user.interface";
+import { ICallListService } from "./icallList.service";
 
-// In-Memory Store
-const callLists : { [key: number]: CallList } = {};
-const contacts : { [key: number]: Contact } = {}; 
-
-
-export const getCallList = async () : Promise<Array<CallList>> => {
-    return Object.values(callLists);
-}
-
-export const createCallList = async (title: string, creator: string, contacts: Array<Contact["id"]>, decription: string) : Promise<CallList> => {
-    const id = new Date().valueOf();
-    callLists[id] = {
-        id: id,
-        title: title,
-        creator: creator,
-        contacts: [],
-        decription: decription
- };
-    return callLists[id];
-}
-
-export const editCallList = async (id:number, title:string, creator: string, contacts: Array<Contact["id"]>, decription: string) : Promise<CallList> => {
-    callLists[id] = {
-        id: id,
-        title: title,
-        creator: creator,
-        contacts: contacts,
-        decription: decription
-    };
-    return callLists[id];
-   }
-
-export const deleteCallList = async (id: number) : Promise<boolean> =>{
-    const callList : CallList = callLists[id];
-    if (! callList) return false;
-    delete callLists[id];
-    return true;
-}
-
-export const addContact = async (contactId : Contact["id"], callListId : CallList["id"]) : Promise<boolean> => {
+export class CallListService implements ICallListService{
     
-    const contact : Contact = contacts[contactId];
-    if (contact) return false; //om contact redan är i list --> return false
+    private callLists: { [key: number]: CallList };
 
-    callLists[callListId].contacts.push(contactId);
-    
-    return true;
+
+    constructor(callLists: { [key: number]: CallList }) {
+        this.callLists = callLists;
+    }
+
+    getCallList : () => Promise<Array<CallList>> = async () => {
+        return Object.values(this.callLists);
+    }  
+
+    createCallList : (title: string, creator: string, contacts: Array<Contact["id"]>, description: string) => Promise<CallList> = 
+    async (title: string, creator: string, contacts: Array<Contact["id"]>, description: string) => {
+        
+        const newCallList: CallList = {
+            id: new Date().valueOf(),
+            title: title,
+            creator: creator,
+            contacts: [],
+            description: description
+        }
+        this.callLists[newCallList.id] = newCallList;
+            
+        return newCallList;
+    }
+
+    editCallList : (id:number, title: string, creator: string, contacts: Array<Contact["id"]>, description: string) => Promise<CallList> = 
+    async (id:number, title: string, creator: string, contacts: Array<Contact["id"]>, description: string)  => {
+        
+        const callList: CallList = this.callLists[id];
+            callList.title = title;
+            callList.creator = creator;
+            callList.contacts = contacts;
+            callList.description = description;
+        
+            
+        return callList;
+    }
+
+    deleteCallList : (id: number) => Promise<Boolean> = async (id: number) => {
+        const callList : CallList = this.callLists[id];
+        if (! callList) return false;
+        delete this.callLists[id];
+        return true;
+    }  
+
+    //Måste fixas!!
+    addContact : (callListId: number) => Promise<CallList> = 
+    async (callListId: number) => {
+
+        const contactId = new Date().valueOf();
+        const callList : CallList = this.callLists[callListId];
+        
+        if (callList.contacts[contactId] == null){
+             
+            callList.contacts.push(contactId);
+            return callList;
+
+        } else {
+            throw new Error("Contact already exists!");
+        }
+ 
+    } 
+       
 }
-
-export function makeCallListService(){
-    return ({
-
-    });
-
+export function makeCallListService(): CallListService {
+    return new CallListService({});
 }
