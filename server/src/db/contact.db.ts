@@ -1,24 +1,24 @@
-import {Schema, Model, connect} from "mongoose";
+import {Schema} from "mongoose";
 import {Contact, Status} from "../model/contact.interface";
 import { conn } from "./conn";
 
-    const contactSchema : Schema = new Schema({
+const contactSchema : Schema = new Schema({
 
         id : {
 
-        type : Number,
+            type : Number,
 
-        required : true,
+            required : true,
 
-        unique: true
+            unique: true
 
         },
 
         name : {
 
-        type : String,
+            type : String,
 
-        required : true
+            required : true
 
         },
 
@@ -77,6 +77,3 @@ async function makeContactModel() {
 }
 
 export const contactModel = makeContactModel();
-    
-
-

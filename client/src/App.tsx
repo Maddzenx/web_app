@@ -5,6 +5,7 @@ import { Contact } from '../../server/src/model/contact.interface';
 import axios, { AxiosResponse } from 'axios';
 import { PleaseWait } from './components/pleaseWait';
 import { CallList } from './components/callList';
+import { Outlet } from 'react-router-dom';
 
 export class App extends React.Component<{}, { receivedContacts: boolean, contacts: Contact[] }> {
   state = { receivedContacts: true, contacts: [] };

@@ -1,29 +1,25 @@
 import {Schema, Model, connect} from "mongoose";
-import {CallList} from "../model/callList.interface";
 import {Contact} from "../model/contact.interface";
 import { conn } from "./conn";
 
 
-export async function connectToCallListDB() : Promise<Model<CallList>> {
-   
-   const db = conn;
-   const callListSchema : Schema = new Schema({
+const callListSchema : Schema = new Schema({
 
  id : {
 
- type : Number,
+   type : Number,
 
- required : true,
+   required : true,
 
- unique: true
+   unique: true
 
  },
 
- title : {
+title : {
 
- type : String,
+   type : String,
 
- required : true
+   required : true
 
  },
 
@@ -45,16 +41,18 @@ export async function connectToCallListDB() : Promise<Model<CallList>> {
 
  contacts : {
 
- type : Array, // ev fixa till detta men de funkade inte med array of contacts typ
+   type : Array, // ev fixa till detta men de funkade inte med array of contacts typ
 
- required : true
+   required : true
 
  }
 
 })
 
-return db.model<CallList>("CallList", callListSchema);
-
+async function makeCallListModel() {
+   return (await conn).model<Contact>("CallList", callListSchema);   
 }
+
+export const contactModel = makeCallListModel();
 
 

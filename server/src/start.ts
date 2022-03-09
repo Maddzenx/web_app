@@ -1,38 +1,22 @@
 
-
- import express from "express";
-
- import { contactRouter } from "./router/contact.router";
+ import Express from "express";
+ import * as path from "path";
+ import { makeContactRouter } from "./router/contact.router";
  import cors from "cors";
- import { callListRouter } from "./router/callList.router";
- import { userRouter } from "./router/user.router";
-
-
-//import { callListRouter } from "./router/callList.router";
+ import { makeCallListRouter } from "./router/callList.router";
+ //import { userRouter } from "./router/user.router";
 
  
- /**
+ export const app : Express.Express = Express();
  
-  * App Variables
- 
-  */
- 
- 
- export const app = express();
- 
- 
- /**
- 
-  * App Configuration
- 
-  */
 
 
- app.use(express.json());
+ app.use(Express.json());
  app.use(cors());
+ app.use(Express.static(path.join(__dirname, '../../client/build')));
 
 
- app.use("/contact", contactRouter);
- app.use("/callList", callListRouter);
- app.use("/user", userRouter);
+ app.use("/contact", makeContactRouter);
+ app.use("/callList", makeCallListRouter);
+ //app.use("/user", userRouter);
 
