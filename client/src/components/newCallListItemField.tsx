@@ -8,7 +8,7 @@ export function NewCallListItemField(props: {addNewCallList: (title: string) => 
         event.preventDefault();
         props.addNewCallList(title);
       }}>
-        <input type="text" value={title} onChange={(event) => {
+        <input type="text" required value={title} onChange={(event) => {
         setTitle(event.target.value)
       }}></input>
       </form>

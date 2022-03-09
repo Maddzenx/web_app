@@ -1,11 +1,13 @@
 import { Contact } from '../../../server/src/model/contact.interface';
 import React from 'react';
 import axios from "axios";
-import { CallListItem } from "./callListItem";
-import { NewContactItemField } from "./newContactItemField"; // Något wierd med denna TODO
-import { SideBar } from './sideBar';
 import { Accordion, Card } from 'react-bootstrap';
 import AccordionItem from 'react-bootstrap/esm/AccordionItem';
+import { ICallListService } from "../../../server/src/service/icallList.service";
+import SideBar from './sideBar';
+import { NewContactItemField } from './newContactItemField';
+import { CallListItem } from './callListItem';
+
 
 
 interface CallListProps {
@@ -53,14 +55,14 @@ export class CallList extends React.Component<CallListProps, {}> {
     );
     this.props.refreshCallList();
   }
-  private async addNewContact(name: string) {
-    await axios.put("http://localhost:8080/contact", { name: name });
+  private async addNewContact(name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string ) {
+    await axios.put("http://localhost:8080/contact", { name: name, company: company, position: position , telephoneNumber: telephoneNumber, email: email, comment: comment});
     this.props.refreshCallList();
   }
 
   override render() {
     return <ul><SideBar />
-      New contact name
+      New contact 
       <NewContactItemField key="new item" addNewContact={this.addNewContact} />
 
       <Accordion >
@@ -69,6 +71,13 @@ export class CallList extends React.Component<CallListProps, {}> {
             <Accordion.Header>{item.name}: {item.name}</Accordion.Header>
             <Accordion.Body>
               {item.name}
+              {item.comment}
+              {item.company}
+              {item.email}
+              {item.position}
+              {item.status}
+              {item.telephoneNumber}
+              {item.id}
             </Accordion.Body>
           </AccordionItem>
         ))}

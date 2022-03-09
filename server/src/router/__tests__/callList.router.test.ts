@@ -19,7 +19,9 @@ class MockCallListService implements ICallListService {
         }
 
         createCallList(title: string, creator: string, contacts: Array<Contact["id"]>, description: string): Promise<CallList> {
+            // expect(0).toBe(1);
             throw new Error("Method not implemented.");
+
         }
 
         editCallList(id: number, title: string, creator: string, contacts: number[], decription: string): Promise<CallList> {
