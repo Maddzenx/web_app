@@ -12,7 +12,7 @@ test("A GET request to / should send a response with the list of callLists", () 
         {id: 2, title: "Call List 2", creator: "sage", contacts: [], description: "my second call list"}
     ];
 
-    class MockCallListService implements ICallListService {
+class MockCallListService implements ICallListService {
 
         getCallList : () => Promise<CallList[]> = async () => {
             return listOfCallLists;

@@ -1,11 +1,7 @@
 import {Schema, Model, connect} from "mongoose";
-import {CallList} from "../model/callList.interface";
 import {Contact, Status} from "../model/contact.interface";
 import { conn } from "./conn";
 
-export async function connectToContactDB() : Promise<Model<Contact>> {
-   
-    const db = conn;
     const contactSchema : Schema = new Schema({
 
         id : {
@@ -75,8 +71,12 @@ export async function connectToContactDB() : Promise<Model<Contact>> {
         },
 
 })
-    return db.model<Contact>("Contact", contactSchema);
-    
+
+async function makeContactModel() {
+    return (await conn).model<Contact>("Contact", contactSchema);   
 }
+
+export const contactModel = makeContactModel();
+    
 
 
