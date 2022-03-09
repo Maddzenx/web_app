@@ -2,7 +2,7 @@ import { CallList } from "../model/callList.interface";
 import { Contact } from "../model/contact.interface";
 import { IContactService } from "./icontact.service";
 
-    export class ContactService implements IContactService{
+export class ContactService implements IContactService{
         
         private contacts: { [key: number]: Contact };
 
