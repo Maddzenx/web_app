@@ -3,7 +3,7 @@ import { CallList } from "../model/callList.interface";
 import { Contact } from "../model/contact.interface";
 import { ICallListService } from "../../src/service/icallList.service";
 
-export function makeCallListRouter(callListService : Promise<ICallListService>): Express.Express {
+export function makeCallListRouter(callListService : ICallListService): Express.Express {
     const callListRouter: Express.Express = Express();
 
 /**get calllist**/
@@ -25,8 +25,8 @@ export function makeCallListRouter(callListService : Promise<ICallListService>):
    callListRouter.post("/", async (req: Request, res: Response) => {
 
     try {
-   const title: string = req.body.title;
    
+    const title: string = req.body.title;
    
     if (! title) {
    
@@ -43,30 +43,13 @@ export function makeCallListRouter(callListService : Promise<ICallListService>):
     res.status(400).send("Missing creator\n");
    
     return;
-   
+
     }
 
     const contacts: Array<Contact["id"]> = req.body.contacts;
-   
-   
-   
-    if (! contacts) {
-   
-    res.status(400).send("Missing contacts\n");
-   
-    return;
-   
-    }
 
     const description: string = req.body.description;
         
-    if (! description) {
-    
-    res.status(400).send("Missing description\n");
-    
-    return;
-    
-    }
    
     const cl = await callListService;
     const callList : CallList = await cl.createCallList(title, creator, contacts, description);
@@ -81,7 +64,7 @@ export function makeCallListRouter(callListService : Promise<ICallListService>):
    
    });
 
-   //Checking edit Call list
+   //edit call list
    callListRouter.put("/", async (req: Request, res: Response) => {
 
     try {
@@ -117,28 +100,9 @@ export function makeCallListRouter(callListService : Promise<ICallListService>):
     }
 
     const contacts: Array<Contact["id"]> = req.body.contacts;
-   
-   
-   
-    if (! contacts) {
-   
-    res.status(400).send("Missing contacts\n");
-   
-    return;
-   
-    }
 
     const decription: string = req.body.decription;
         
-    if (! decription) {
-    
-    res.status(400).send("Missing decription\n");
-    
-    return;
-    
-    }
-  
-
     const cl = await callListService;
     const callList : CallList = await cl.editCallList(id, title, creator, contacts, decription);
    
@@ -185,24 +149,13 @@ export function makeCallListRouter(callListService : Promise<ICallListService>):
    callListRouter.put("/", async (req: Request, res: Response) => {
 
     try {
-   
-    const contactId: Contact["id"] = req.body.contactId;
-   
-   
-    if (! contactId) {
-   
-    res.status(400).send("Missing contactId\n");
-   
-    return;
-   
-    }
 
     const callListId: CallList["id"] = req.body.callListId;
    
    
     if (! callListId) {
    
-    res.status(400).send("Missing callListId\n");
+    res.status(400).send("Missing callList Id\n");
    
     return;
    

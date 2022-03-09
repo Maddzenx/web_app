@@ -1,14 +1,15 @@
 import Express, { Request, Response} from "express";
 import { Contact } from "../model/contact.interface";
+import { contactDBService } from "../service/contactdb.service";
 import { IContactService } from "../service/icontact.service";
 
 
-export function makeContactRouter(ContactService : Promise<IContactService>): Express.Express {
+export function makeContactRouter(contactService: IContactService): Express.Express {
     const contactRouter: Express.Express = Express();
 
     contactRouter.get("/", async (req: Request, res: Response) => {
         try {
-            const c = await ContactService;
+            const c = await contactService;
             const contacts : Array<Contact> = await c.getContact();
 
             res.status(200).send(contacts);
@@ -20,15 +21,13 @@ export function makeContactRouter(ContactService : Promise<IContactService>): Ex
     
     });
 
-    /** test */
+    /** create contact */
 
     contactRouter.post("/", async (req: Request, res: Response) => {
 
         try {
     
         const name: string = req.body.name;
-    
-    
     
         if (! name) {
     
@@ -38,28 +37,6 @@ export function makeContactRouter(ContactService : Promise<IContactService>): Ex
     
         }
 
-        const company: string = req.body.company;
-    
-    
-    
-        if (! company) {
-    
-        res.status(400).send("Missing company\n");
-    
-        return;
-    
-        }
-
-        const position: string = req.body.position;
-            
-        if (! position) {
-        
-        res.status(400).send("Missing position\n");
-        
-        return;
-        
-        }
-    
         const telephoneNumber: string = req.body.telephoneNumber;
             
         if (! telephoneNumber) {
@@ -70,27 +47,12 @@ export function makeContactRouter(ContactService : Promise<IContactService>): Ex
         
         }
 
+        const company: string = req.body.company;
+        const position: string = req.body.position;
         const email: string = req.body.email;
-            
-        if (! email) {
-        
-        res.status(400).send("Missing email\n");
-        
-        return;
-        
-        }
-
         const comment: string = req.body.comment;
-            
-        if (! comment) {
-        
-        res.status(400).send("Missing comment\n");
-        
-        return;
-        
-        }
     
-        const c = await ContactService;
+        const c = await contactService;
         const contact : Contact = await c.createContact(name, company, position, telephoneNumber, email, comment);
     
         res.status(201).send(contact);
@@ -103,7 +65,7 @@ export function makeContactRouter(ContactService : Promise<IContactService>): Ex
     
     });
 
-    //Checking editContact
+    //EditContact
     contactRouter.put("/", async (req: Request, res: Response) => {
 
         try {
@@ -127,28 +89,6 @@ export function makeContactRouter(ContactService : Promise<IContactService>): Ex
         return;
     
         }
-
-        const company: string = req.body.company;
-    
-    
-    
-        if (! company) {
-    
-        res.status(400).send("Missing company\n");
-    
-        return;
-    
-        }
-
-        const position: string = req.body.position;
-            
-        if (! position) {
-        
-        res.status(400).send("Missing position\n");
-        
-        return;
-        
-        }
     
         const telephoneNumber: string = req.body.telephoneNumber;
             
@@ -160,15 +100,7 @@ export function makeContactRouter(ContactService : Promise<IContactService>): Ex
         
         }
 
-        const email: string = req.body.email;
-            
-        if (! email) {
-        
-        res.status(400).send("Missing email\n");
-        
-        return;
-        
-        }
+
 
         const status: number = req.body.status;
             
@@ -180,17 +112,12 @@ export function makeContactRouter(ContactService : Promise<IContactService>): Ex
         
         }
 
+        const company: string = req.body.company;
+        const position: string = req.body.position;
+        const email: string = req.body.email;
         const comment: string = req.body.comment;
-            
-        if (! comment) {
-        
-        res.status(400).send("Missing comment\n");
-        
-        return;
-        
-        }
     
-        const c = await ContactService;
+        const c = await contactService;
         const contact : Contact = await c.editContact(id, name, company, position, telephoneNumber, email, status, comment);
     
         res.status(201).send(contact);
@@ -216,7 +143,7 @@ export function makeContactRouter(ContactService : Promise<IContactService>): Ex
             
             }
 
-            const c = await ContactService;
+            const c = await contactService;
             const contact : Boolean = await c.deleteContact(id);
 
         res.status(201).send(contact);
@@ -244,7 +171,7 @@ export function makeContactRouter(ContactService : Promise<IContactService>): Ex
             
             }
             
-            const c = await ContactService;
+            const c = await contactService;
             const noAnswer : Contact = await c.changeStatus(id, status);
             
             if (! noAnswer) {
@@ -265,4 +192,9 @@ export function makeContactRouter(ContactService : Promise<IContactService>): Ex
             
             });
             return contactRouter;
+        }
+    
+    export function contactRouter() : Express.Express {
+           
+        return makeContactRouter(contactDBService);   
         }
