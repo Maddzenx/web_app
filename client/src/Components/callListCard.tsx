@@ -5,6 +5,8 @@ import { Outlet } from 'react-router-dom';
 import { ICallList } from '../interfaces';
 import AddCallList from './addCallList';
 import styles from '../callList.module.css';
+import axios from 'axios';
+import addCallList from './addCallList';
 
 const CallListCard: FC = () => {
 
@@ -20,13 +22,15 @@ const CallListCard: FC = () => {
         }
     };
 
-    const addCallList = (): void => {
+    
+    const addCallList = (): void => { //send req to server 
         const newCallList = { callListTitle: title, callListDescription: description };
         setCallList([...callList, newCallList]);
         setTitle("");
         setDescription("");
     }
-    const deleteCallList = (callListTitleToDelete: string): void => {
+
+   const deleteCallList = (callListTitleToDelete: string): void => { //send req to server 
         setCallList(
             callList.filter((title) => {
                 return title.callListTitle !== callListTitleToDelete;

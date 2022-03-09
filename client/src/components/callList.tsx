@@ -9,7 +9,7 @@ interface CallListProps {
     refreshCallList : () => void
 }
 
-export  class CallList extends React.Component<CallListProps, {}> {
+export class CallList extends React.Component<CallListProps, {}> {
     constructor(props: CallListProps){
     super(props);
 

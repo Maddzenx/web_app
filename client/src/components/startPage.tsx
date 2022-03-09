@@ -9,12 +9,12 @@ const sideBar = <SideBar />
 
 export function StartPage(){
     return <div>
-            <Link to="/callListPage">Go to a fake Call List
-            </Link>
-            <Link to="/callListCard">Go to Dashboard
-            </Link>
-            <SideBar />
+        <SideBar />
+        <nav>
+        <Link to="/callListPage">Go to a fake Call List </Link>
+            <Link to="/callListCard">Go to Dashboard</Link>
             <LogInPage/>
+        </nav>
             <Outlet/>
         </div>
 }
