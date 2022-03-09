@@ -6,10 +6,11 @@ import './callList.module.css'
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { StartPage } from './components/startPage';
-import SideBar from './components/sideBar';
+//import SideBar from './components/sideBar';
 import { CallListPage } from './components/callListPage';
 import { ContactView } from './components/contactView';
 import { App } from './App';
+import CallListCard from './components/callListCard';
 
 ReactDOM.render(
   <React.StrictMode>
