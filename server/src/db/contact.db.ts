@@ -56,7 +56,7 @@ const contactSchema : Schema = new Schema({
 
         status : {
 
-            type : Status,
+            type : Number,
             
             required : true
             

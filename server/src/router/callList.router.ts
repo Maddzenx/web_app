@@ -2,6 +2,7 @@ import Express, { Request, Response} from "express";
 import { CallList } from "../model/callList.interface";
 import { Contact } from "../model/contact.interface";
 import { ICallListService } from "../../src/service/icallList.service";
+import { callListDBService } from "../service/callListdb.service";
 
 export function makeCallListRouter(callListService : ICallListService): Express.Express {
     const callListRouter: Express.Express = Express();
@@ -29,38 +30,30 @@ export function makeCallListRouter(callListService : ICallListService): Express.
     const title: string = req.body.title;
    
     if (! title) {
-   
-    res.status(400).send("Missing title\n");
-   
-    return;
-   
+        res.status(400).send("Missing title\n");
+        return;
     }
     const creator: string = req.body.creator;
    
-   
     if (! creator) {
-   
-    res.status(400).send("Missing creator\n");
-   
-    return;
-
+        res.status(400).send("Missing creator\n");
+        return;
     }
 
-    const contacts: Array<Contact["id"]> = req.body.contacts;
+        const contacts: Array<Contact["id"]> = req.body.contacts;
 
-    const description: string = req.body.description;
-        
-   
-    const cl = await callListService;
-    const callList : CallList = await cl.createCallList(title, creator, contacts, description);
-   
-    res.status(201).send(callList);
-   
-    } catch (e : any) {
-   
-    res.status(500).send(e.message);
-   
-    }
+        const description: string = req.body.description;
+            
+        const cl = await callListService;
+        const callList : CallList = await cl.createCallList(title, creator, contacts, description);
+    
+        res.status(201).send(callList);
+    
+        } catch (e : any) {
+    
+        res.status(500).send(e.message);
+    
+        }
    
    });
 
@@ -72,31 +65,20 @@ export function makeCallListRouter(callListService : ICallListService): Express.
     const id: number = req.body.id;
     
     if (! id) {
-    
-    res.status(400).send("Missing id\n");
-    
-    return;
-    
+        res.status(400).send("Missing id\n");
+        return;
     }
     const title: string = req.body.creator;
    
-   
     if (! title) {
-   
-    res.status(400).send("Missing title\n");
-   
-    return;
-   
+        res.status(400).send("Missing title\n");
+        return;
     }
     const creator: string = req.body.creator;
    
-   
     if (! creator) {
-   
-    res.status(400).send("Missing creator\n");
-   
-    return;
-   
+        res.status(400).send("Missing creator\n");
+        return;  
     }
 
     const contacts: Array<Contact["id"]> = req.body.contacts;
@@ -123,11 +105,8 @@ export function makeCallListRouter(callListService : ICallListService): Express.
         const id: number = req.body.id;
         
         if (! id) {
-        
-        res.status(400).send("Missing id\n");
-        
-        return;
-        
+            res.status(400).send("Missing id\n");
+            return;
         }
 
         const cl = await callListService;    
@@ -175,3 +154,7 @@ export function makeCallListRouter(callListService : ICallListService): Express.
    });
    return callListRouter;
 }
+export function callListRouter() : Express.Express {
+           
+    return makeCallListRouter(callListDBService);   
+    }

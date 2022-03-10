@@ -1,5 +1,5 @@
 import {Schema, Model, connect} from "mongoose";
-import {Contact} from "../model/contact.interface";
+import { CallList } from "../model/callList.interface";
 import { conn } from "./conn";
 
 
@@ -50,9 +50,9 @@ title : {
 })
 
 async function makeCallListModel() {
-   return (await conn).model<Contact>("CallList", callListSchema);   
+   return (await conn).model<CallList>("CallList", callListSchema);   
 }
 
-export const contactModel = makeCallListModel();
+export const callListModel = makeCallListModel();
 
 

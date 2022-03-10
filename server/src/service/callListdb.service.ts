@@ -1,24 +1,18 @@
 import { ICallListService } from "./icallList.service";
-import { Model } from "mongoose";
-import { connectToCallListDB } from "../db/callList.db";
+import { callListModel } from "../db/callList.db";
 import { Contact } from "../model/contact.interface";
 import { CallList } from "../model/callList.interface";
 
 
-
 class CallListDBService implements ICallListService {
-    private callListModel : Model<CallList>
-
-    constructor(callListModel : Model<CallList>) {
-        this.callListModel = callListModel;
-    }
-
     async getCallList(): Promise<CallList[]> {
-        return await this.callListModel.find();
+        const cm = await callListModel;
+        return await cm.find();
     }
 
     async createCallList(title: string, creator: string, contacts: Array<Contact["id"]>, description: string): Promise<CallList> {
-        return await this.callListModel.create({
+        const cm = await callListModel;
+        return await cm.create({
             id : new Date().valueOf(),
             title: title, 
             creator: creator,
@@ -27,13 +21,14 @@ class CallListDBService implements ICallListService {
         })
     }
     async editCallList(clId: number, clTitle: string, clCreator: string, clContacts: Array<Contact["id"]>, clDescription: string): Promise<CallList> {
-        await this.callListModel.updateOne( {id: clId},
+        const cm = await callListModel;
+        await cm.updateOne( {id: clId},
             {title: clTitle, 
             creator: clCreator,
             contacts: clContacts,
             decription: clDescription});
 
-        const doc = await this.callListModel.findOne({id: clId});
+        const doc = await cm.findOne({id: clId});
         if (doc === null)
             throw new Error("No document with id " + clId);
         else return doc;
@@ -41,10 +36,10 @@ class CallListDBService implements ICallListService {
 
     //if statement
     async deleteCallList(callListId: number): Promise<Boolean> {
+        const cm = await callListModel;
+        await cm.findByIdAndDelete(callListId);
 
-        await this.callListModel.findByIdAndDelete(callListId);
-
-        const doc = await this.callListModel.findOne({id: callListId});
+        const doc = await cm.findOne({id: callListId});
 
         if(doc == null){
             return true;
@@ -54,11 +49,11 @@ class CallListDBService implements ICallListService {
     //måste fixas
     async addContact(callListId: number): Promise<CallList> {
         const contactId = new Date().valueOf();
-        
-        await this.callListModel.updateOne({id: callListId}, 
+        const cm = await callListModel;
+        await cm.updateOne({id: callListId}, 
             {$push: {contacts: contactId }});
 
-            const doc = await this.callListModel.findOne({id: callListId});
+            const doc = await cm.findOne({id: callListId});
             
             if (doc === null)
                 throw new Error("No document with id " + callListId);
@@ -68,6 +63,4 @@ class CallListDBService implements ICallListService {
 
 }
 
-export async function callListDBService() : Promise<ICallListService> {
-    return new CallListDBService(await connectToCallListDB());
-}
+export const callListDBService = new CallListDBService();

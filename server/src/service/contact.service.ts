@@ -1,4 +1,3 @@
-import { CallList } from "../model/callList.interface";
 import { Contact } from "../model/contact.interface";
 import { IContactService } from "./icontact.service";
 
