@@ -1,9 +1,9 @@
 
  import Express from "express";
  import * as path from "path";
- import { makeContactRouter } from "./router/contact.router";
+ import { contactRouter } from "./router/contact.router";
  import cors from "cors";
- import { makeCallListRouter } from "./router/callList.router";
+ import { callListRouter} from "./router/callList.router";
  //import { userRouter } from "./router/user.router";
 
  
@@ -16,7 +16,7 @@
  app.use(Express.static(path.join(__dirname, '../../client/build')));
 
 
- app.use("/contact", makeContactRouter);
- app.use("/callList", makeCallListRouter);
+ app.use("/contact", contactRouter);
+ app.use("/callList", callListRouter);
  //app.use("/user", userRouter);
 

@@ -3,23 +3,23 @@ import { callListModel } from "../db/callList.db";
 import { Contact } from "../model/contact.interface";
 import { CallList } from "../model/callList.interface";
 
-
 class CallListDBService implements ICallListService {
     async getCallList(): Promise<CallList[]> {
         const cm = await callListModel;
         return await cm.find();
     }
 
-    async createCallList(title: string, creator: string, contacts: Array<Contact["id"]>, description: string): Promise<CallList> {
+    async createCallList(title: string, creator: string, description: string): Promise<CallList> {
         const cm = await callListModel;
         return await cm.create({
             id : new Date().valueOf(),
             title: title, 
             creator: creator,
-            contacts: contacts, //should be an empty array of contacts
+            contacts: [],
             decription: description
         })
     }
+
     async editCallList(clId: number, clTitle: string, clCreator: string, clContacts: Array<Contact["id"]>, clDescription: string): Promise<CallList> {
         const cm = await callListModel;
         await cm.updateOne( {id: clId},
@@ -34,7 +34,6 @@ class CallListDBService implements ICallListService {
         else return doc;
     }
 
-    //if statement
     async deleteCallList(callListId: number): Promise<Boolean> {
         const cm = await callListModel;
         await cm.findByIdAndDelete(callListId);
@@ -59,8 +58,6 @@ class CallListDBService implements ICallListService {
                 throw new Error("No document with id " + callListId);
             else return doc;
     }
-
-
 }
 
 export const callListDBService = new CallListDBService();
