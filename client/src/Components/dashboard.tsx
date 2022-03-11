@@ -4,14 +4,14 @@ import axios from "axios";
 import SideBar from './sideBar';
 import { NewCallListItemField } from './newCallListItemField';
 import { CallList } from '../../../server/src/model/callList.interface';
-import { Accordion, Button, FormControl, InputGroup } from 'react-bootstrap';
-import AccordionItem from 'react-bootstrap/esm/AccordionItem';
-import addCallList from './addCallList';
+import { Button, Card, Container, InputGroup } from 'react-bootstrap';
 
 interface DashboardProps {
     callLists: CallList[],
 }
+
 const sideBar = <SideBar />
+
 export class Dashboard extends React.Component<DashboardProps, {}> {
     constructor(props: DashboardProps) {
         super(props);
@@ -19,22 +19,61 @@ export class Dashboard extends React.Component<DashboardProps, {}> {
         this.addNewCallList = this.addNewCallList.bind(this);
     }
 
-    private async addNewCallList(id: number, title: string, creator: string, contacts: Array<Contact["id"]>, description?: string) {
-        await axios.put("http://localhost:8080/callList", { id: id, title: title, creator: creator, contacts: contacts, description: description });
+    private async addNewCallList(title: string, description?: string) {
+        await axios.put("http://localhost:8080/callList", { title: title, description: description });
     }
 
-    override render() {
-        return <ul><SideBar />
+    deleteContact = (index: number): void => {
+        //IContactService.deletContact(id)
+        alert('You clicked me!');
+        this.tList = this.tList.slice(index,1)
+      }
 
-            <InputGroup className="mb-3">
-                <NewCallListItemField key="new item" addNewCallList={function (title: string, description: string): void {
-                    throw new Error('Function not implemented.');
-                }} />
-                <Button>Add Call List</Button>
+    tempCl = {
+        tempListItems: [
+            {
+                title: "aa",
+                decription: "bb"
+            }, {
+                title: "cc",
+                decription: "dd"
+            }, {
+                title: "ee",
+                decription: "ff"
+            }, {
+                title: "gg",
+                decription: "hh"
+            }, {
+                title: "ii",
+                decription: "jj"
+            },
+        ]
+    };
+    tList = this.tempCl.tempListItems
+
+    //byt ut paddingTop
+    override render() {
+        return <Container>
+            <SideBar />
+            <InputGroup className="mb-3" style={{ paddingTop: "60px" }}>
+                <NewCallListItemField key="new item" addNewCallList={this.addNewCallList} />
+                <Button>Add</Button>
             </InputGroup>
 
-
-
-        </ul>
+            <Card style={{ width: '18rem' }}>
+                <Card.Body>
+                    <Card.Title>test</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted">this is a test text</Card.Subtitle>
+                    <Card.Link href="/callListPage">Go to Call List</Card.Link>
+                    <Button variant="outline-danger" size="sm" style={{ float: 'right' }}
+                        onClick={() => {
+                            //this.deleteContact(index);
+                        }}
+                    >
+                        X
+                    </Button>
+                </Card.Body>
+            </Card>
+        </Container>
     }
 }
