@@ -12,9 +12,9 @@ export function SideBar() {
 
     <Container fluid>
       <>
-        <Navbar bg="dark" variant="dark">
-          <Container>
-            <Navbar.Brand >Name</Navbar.Brand>
+        <Navbar bg="dark" variant="dark" expand="sm"  fixed="top">
+          <Container fluid>
+            <Navbar.Brand>Name</Navbar.Brand>
             <Nav className="me-auto">
               <Nav.Link href="startPage">Dashboard</Nav.Link> 
               <Nav.Link href="callListPage">Profile</Nav.Link>

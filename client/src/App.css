@@ -4,7 +4,9 @@
 
 body {
   margin: 0%;
-  padding: 0%;
+  
+  padding-top: 70px; 
+  width: 100%;
 }
 
 .App-logo {
@@ -32,6 +34,13 @@ body {
 .App-link {
   color: #61dafb;
 }
+
+.container{
+  width: 100%;
+  padding: 0%;
+}
+
+
 
 
 @keyframes App-logo-spin {
