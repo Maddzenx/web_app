@@ -22,18 +22,18 @@ export function makeCallListRouter(callListService : ICallListService): Express.
    
    });
 
-   /**create call list**/
+/**create call list**/
    callListRouter.post("/", async (req: Request, res: Response) => {
 
     try {
    
-    const title: string = req.body.title;
+        const title: string = req.body.title;
    
     if (! title) {
         res.status(400).send("Missing title\n");
         return;
     }
-    const creator: string = req.body.creator;
+        const creator: string = req.body.creator;
    
     if (! creator) {
         res.status(400).send("Missing creator\n");
@@ -41,15 +41,18 @@ export function makeCallListRouter(callListService : ICallListService): Express.
     }
 
         const contacts: Array<Contact["id"]> = req.body.contacts;
-
+    if(contacts.length != 0){
+        res.status(400).send("Contacts should be empty when creating a new callList\n");
+        return;
+    }
         const description: string = req.body.description;
             
         const cl = await callListService;
-        const callList : CallList = await cl.createCallList(title, creator, contacts, description);
+        const callList : CallList = await cl.createCallList(title, creator, description);
     
         res.status(201).send(callList);
     
-        } catch (e : any) {
+    } catch (e : any) {
     
         res.status(500).send(e.message);
     
@@ -82,7 +85,6 @@ export function makeCallListRouter(callListService : ICallListService): Express.
     }
 
     const contacts: Array<Contact["id"]> = req.body.contacts;
-
     const decription: string = req.body.decription;
         
     const cl = await callListService;
@@ -100,56 +102,52 @@ export function makeCallListRouter(callListService : ICallListService): Express.
    /**delete calll lis**/
    callListRouter.delete("/:id", async (req : Request, res: Response) => {
 
-    try {
-   
-        const id: number = req.body.id;
-        
-        if (! id) {
-            res.status(400).send("Missing id\n");
-            return;
-        }
+        try {
+    
+            const id: number = req.body.id;
+            
+            if (! id) {
+                res.status(400).send("Missing id\n");
+                return;
+            }
 
-        const cl = await callListService;    
-        const isDeleted : Boolean = await cl.deleteCallList(id);
+            const cl = await callListService;    
+            const isDeleted : Boolean = await cl.deleteCallList(id);
 
-        res.status(201).send(isDeleted);
-   
-        } catch (e : any) {
-   
-        res.status(500).send(e.message);
-   
-        }
+            res.status(201).send(isDeleted);
+    
+            } catch (e : any) {
+    
+            res.status(500).send(e.message);
+    
+            }
 
    });
 
 
-   //Checking add contact to call list
+   //Add contact to call list
 
-   callListRouter.put("/", async (req: Request, res: Response) => {
+    callListRouter.put("/", async (req: Request, res: Response) => {
 
-    try {
+        try {
 
-    const callListId: CallList["id"] = req.body.callListId;
-   
-   
-    if (! callListId) {
-   
-    res.status(400).send("Missing callList Id\n");
-   
-    return;
-   
-    }
-   
-    const cl = await callListService;
-    const isAdded : CallList = await cl.addContact(callListId);
-   
-    res.status(201).send(isAdded);
-   
-    } catch (e : any) {
-   
-    res.status(500).send(e.message);
-   
-    }
+        const callListId: CallList["id"] = req.body.callListId;
+    
+        if (! callListId) {
+        res.status(400).send("Missing callList Id\n");
+        return;
+        }
+    
+        const cl = await callListService;
+        const isAdded : CallList = await cl.addContact(callListId);
+    
+        res.status(201).send(isAdded);
+    
+        } catch (e : any) {
+    
+        res.status(500).send(e.message);
+    
+        }
    
    });
    return callListRouter;

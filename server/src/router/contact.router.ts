@@ -3,7 +3,6 @@ import { Contact } from "../model/contact.interface";
 import { contactDBService } from "../service/contactdb.service";
 import { IContactService } from "../service/icontact.service";
 
-
 export function makeContactRouter(contactService: IContactService): Express.Express {
     const contactRouter: Express.Express = Express();
 
@@ -49,6 +48,11 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
         const company: string = req.body.company;
         const position: string = req.body.position;
         const email: string = req.body.email;
+
+        if(!(email.includes("@") && email.includes(".com"))){
+            res.status(400).send("Invalid email address\n");
+            return;
+        }
         const comment: string = req.body.comment;
     
         const c = await contactService;
@@ -77,7 +81,6 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
         }
         const name: string = req.body.name;
     
-    
         if (! name) {
             res.status(400).send("Missing name\n");
             return;
@@ -105,6 +108,12 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
         const company: string = req.body.company;
         const position: string = req.body.position;
         const email: string = req.body.email;
+        
+        if(!(email.includes("@") && email.includes(".com"))){
+            res.status(400).send("Invalid email address\n");
+            return;
+        }
+
         const comment: string = req.body.comment;
     
         const c = await contactService;
@@ -129,7 +138,6 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
             res.status(400).send("Missing id\n");
             return;
             }
-
             const c = await contactService;
             const contact : Boolean = await c.deleteContact(id);
 
@@ -143,8 +151,8 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
 
     });
 
-        //Checking changestatus
-        contactRouter.put("/:id, status", async (req : Request, res: Response) => {
+    //Changestatus
+    contactRouter.put("/:id, status", async (req : Request, res: Response) => {
 
             try {
             
@@ -172,6 +180,5 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
         }
     
     export function contactRouter() : Express.Express {
-           
         return makeContactRouter(contactDBService);   
         }

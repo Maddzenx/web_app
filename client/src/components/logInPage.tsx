@@ -62,8 +62,8 @@ class LogInPageComponent extends React.Component<any, any> {
                         </div>
                         <div className="col">
                         <div className="row">
-                            <a className="btn btn-success rounded-pill" href="dashboard.html" role="button">Sign in</a>
-                            <a href="signUp.html">Create a new account</a>
+                            <a className="btn btn-success rounded-pill" href="/startPage" role="button">Sign in</a>
+                            <a href="/createNewAccount">Create a new account</a>
                         </div>
                         </div>
                     </div>
