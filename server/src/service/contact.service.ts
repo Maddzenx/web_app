@@ -8,12 +8,15 @@ export class ContactService implements IContactService{
         constructor(contacts: { [key: number]: Contact }) {
             this.contacts = contacts;
         }
+    createContact(name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string): Promise<Contact> {
+        throw new Error("Method not implemented.");
+    }
 
     getContact : () => Promise<Contact[]> = async () => {
             return Object.values(this.contacts);
         }
 
-    createContact : (name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string) => Promise<Contact>
+    /*createContact : (name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string) => Promise<Contact>
         = async (name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string) => {
             
             if (! name) {
@@ -41,8 +44,8 @@ export class ContactService implements IContactService{
             }
             this.contacts[newContact.id] = newContact;
                 
-            return newContact;
-        }
+            return "";
+        }*/
 
     editContact : (id: number, name: string, company: string, position: string, telephoneNumber: string, email: string, status: number, comment: string) => Promise<Contact>
         = async (id: number, name: string, company: string, position: string, telephoneNumber: string, email: string, status: number, comment: string) => {

@@ -16,7 +16,7 @@
  app.use(Express.static(path.join(__dirname, '../../client/build')));
 
 
- app.use("/contact", contactRouter);
- app.use("/callList", callListRouter);
+ app.use("/contact", contactRouter());
+ app.use("/callList", callListRouter());
  //app.use("/user", userRouter);
 

@@ -13,12 +13,14 @@ class ContactDBService implements IContactService {
     async createContact(name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string): Promise<Contact> {
         const cm = await contactModel;
         return await cm.create({
+            id: new Date().valueOf(),
             name: name, 
             company: company, 
             position: position, 
             telephoneNumber: telephoneNumber, 
             email: email, 
-            comment: comment
+            comment: comment,
+            status: 4
         }
         );
     }

@@ -53,7 +53,7 @@ export class CallList extends React.Component<CallListProps, {}> {
 
 
   private async addNewContact(name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string) {
-    await axios.put("http://localhost:8080/contact", { name: name, company: company, position: position, telephoneNumber: telephoneNumber, email: email, comment: comment });
+    await axios.post("http://localhost:8080/contact", { name: name, company: company, position: position, telephoneNumber: telephoneNumber, email: email, comment: comment });
     this.props.refreshCallList();
   }
 
