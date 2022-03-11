@@ -39,7 +39,7 @@ const CallListCard: FC = () => {
     };
 
     return (
-        <div className={styles.CallListCard}>
+        <div className={styles.CallListCard} style={{paddingTop: "60px"}}>
             <SideBar />
             <div className={styles.header}></div>
             <div className={styles.inputContainer}>
