@@ -30,21 +30,20 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
         const name: string = req.body.name;
     
         if (! name) {
-    
-        res.status(400).send("Missing name\n");
-    
-        return;
-    
+            res.status(400).send("Missing name\n");
+            return;
         }
 
         const telephoneNumber: string = req.body.telephoneNumber;
             
         if (! telephoneNumber) {
-        
-        res.status(400).send("Missing telephoneNumber\n");
-        
-        return;
-        
+            res.status(400).send("Missing telephoneNumber\n");
+            return;
+        }
+        //check if telephone includes only numbers
+        if(telephoneNumber.match(/^[0-9]+$/) == null){
+            res.status(400).send("Telephone numbers doesn't contain only digits\n");
+            return;
         }
 
         const company: string = req.body.company;
@@ -73,43 +72,34 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
         const id: number = req.body.id;
         
         if (! id) {
-        
-        res.status(400).send("Missing id\n");
-        
-        return;
-        
+            res.status(400).send("Missing id\n");
+            return;
         }
         const name: string = req.body.name;
     
     
         if (! name) {
-    
-        res.status(400).send("Missing name\n");
-    
-        return;
-    
+            res.status(400).send("Missing name\n");
+            return;
         }
     
         const telephoneNumber: string = req.body.telephoneNumber;
             
         if (! telephoneNumber) {
-        
-        res.status(400).send("Missing telephoneNumber\n");
-        
-        return;
-        
+            res.status(400).send("Missing telephoneNumber\n");
+            return;
         }
 
-
-
+        //check if telephone includes only numbers
+        if(telephoneNumber.match(/^[0-9]+$/) == null){
+            res.status(400).send("Telephone numbers doesn't contain only digits\n");
+            return;
+        }
         const status: number = req.body.status;
             
         if (! status) {
-        
-        res.status(400).send("Missing status\n");
-        
-        return;
-        
+            res.status(400).send("Missing status\n");
+            return;
         }
 
         const company: string = req.body.company;
@@ -136,11 +126,8 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
             const id: number = req.body.id;
             
             if (! id) {
-            
             res.status(400).send("Missing id\n");
-            
             return;
-            
             }
 
             const c = await contactService;
@@ -166,21 +153,11 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
             
             
             if (! req.body.status[status]) {
-            
             res.status(400).send("Bad call to /contact/:id\n");
-            
             }
             
             const c = await contactService;
             const noAnswer : Contact = await c.changeStatus(id, status);
-            
-            if (! noAnswer) {
-            
-            res.status(400).send(`Status is not no answer ${id}\n`);
-            
-            }
-            
-            
             
             res.status(200).send("Status set\n");
             

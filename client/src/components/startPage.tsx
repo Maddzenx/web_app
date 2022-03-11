@@ -10,7 +10,7 @@ const sideBar = <SideBar />
 export function StartPage(){
     return <div>
         <SideBar />
-        <nav>
+        <nav style={{paddingTop: "60px"}}>
         <Link to="/callListPage">Go to a fake Call List </Link>
             <Link to="/callListCard">Go to Dashboard</Link>
             <LogInPage/>

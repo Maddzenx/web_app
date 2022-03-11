@@ -11,6 +11,7 @@ import { StartPage } from './Components/startPage';
 import CallListCards from './Components/callListCards';
 import { Dashboard } from './Components/dashboard';
 
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

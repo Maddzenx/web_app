@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 
 export function NewContactItemField(props: { addNewContact: (name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string,) => void }) {
   const [name, setName] = useState("");
@@ -14,30 +15,32 @@ export function NewContactItemField(props: { addNewContact: (name: string, compa
       event.preventDefault();
       props.addNewContact(name, company, position, telephoneNumber, email, comment);
     }}>
-      Name: 
-      <input type="text" value={name} onChange={(event) => {
+       
+      <input type="text" value={name} placeholder="Name" onChange={(event) => {
         setName(event.target.value)
       }}></input>
-      Company:
-      <input type="text" value={company} onChange={(event) => {
+      
+      <input type="text" value={company} placeholder="Company" onChange={(event) => {
         setCompany(event.target.value)
       }}></input>
-      Position:
-      <input type="text" value={position} onChange={(event) => {
+      
+      <input type="text" value={position} placeholder="Position" onChange={(event) => {
         setPosition(event.target.value)
       }}></input>
-      Phone number:
-      <input type="text" value={telephoneNumber} onChange={(event) => {
+      
+      <input type="text" value={telephoneNumber} placeholder="Phone number" onChange={(event) => {
         setTelephoneNumber(event.target.value)
       }}></input>
-      Email:
-      <input type="text" value={email} onChange={(event) => {
+      
+      <input type="email" value={email} placeholder="Email" onChange={(event) => {
         setEmail(event.target.value)
       }}></input>
-      Comment:
-      <input type="text" value={comment} onChange={(event) => {
+      
+      <input type="text" value={comment} placeholder="Comment" onChange={(event) => {
         setComment(event.target.value)
       }}></input>
+      
+      <Button size="sm" type="submit">save</Button>
 
 
 
