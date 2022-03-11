@@ -8,8 +8,6 @@ import SideBar from './sideBar';
 import { NewContactItemField } from './newContactItemField';
 import { CallListItem } from './callListItem';
 
-
-
 interface CallListProps {
   contacts: Contact[],
   refreshCallList: () => void
@@ -46,7 +44,6 @@ export class CallList extends React.Component<CallListProps, {}> {
       }
     ]
   };
-
 
   private async markContactStatus(id: number) {
     // TODO Extract hostname

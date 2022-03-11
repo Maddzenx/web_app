@@ -6,6 +6,8 @@ import { ICallList } from '../interfaces';
 import AddCallList from './addCallList';
 import styles from '../callList.module.css';
 
+//not needed, delete later
+
 const CallListCards: FC = () => {
 
     const [title, setTitle] = useState<string>("");
@@ -19,7 +21,6 @@ const CallListCards: FC = () => {
             setDescription(event.target.value)
         }
     };
-
     
     const addCallList = (): void => { //send req to server 
         const newCallList = { callListTitle: title, callListDescription: description };
@@ -35,10 +36,6 @@ const CallListCards: FC = () => {
             })
         );
     };
-
-  
-
-
 
     return (
         <div className={styles.CallListCard}>
@@ -60,6 +57,8 @@ const CallListCards: FC = () => {
 
 };
 export default CallListCards;
+
+
 
 
   

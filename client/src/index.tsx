@@ -9,6 +9,7 @@ import { App } from './App';
 import { ContactView } from './Components/contactView';
 import { StartPage } from './Components/startPage';
 import CallListCards from './Components/callListCards';
+import { Dashboard } from './Components/dashboard';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,7 +21,7 @@ ReactDOM.render(
           <Route path=":addContact" element={<p>addContactView</p>} />
           <Route path=":expandContact" element={<ContactView />} />
         </Route>
-        <Route path="/callListCard" element={<CallListCards />}>
+        <Route path="/callListCard" element={<Dashboard callLists={[]} />}>
         </Route>
       </Routes>
     </BrowserRouter>

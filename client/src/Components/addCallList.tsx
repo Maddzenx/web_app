@@ -1,6 +1,9 @@
 import { ICallList } from "../interfaces";
 import styles from '../callList.module.css';
 
+//not needed, delete later
+
+
 interface Props {
     callList: ICallList;
     deleteCallList(callListTitleToDelete: string): void;
