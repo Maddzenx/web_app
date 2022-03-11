@@ -31,7 +31,6 @@ test("Creating a callList should return a callList with its given arguments", as
         const callListService = new CallListService({});
         return callListService.createCallList("title", "user", "description").then((callList : CallList) => {
             expect(callList.title).toEqual("title");
-            expect(callList.creator).toEqual("user");
             expect(callList.description).toEqual("description");
             expect(callList.contacts).toEqual([]);
         })

@@ -19,9 +19,6 @@ export class CallListService implements ICallListService{
         if (! title) {
             throw new Error("Missing title\n");
         }
-        if (! creator) {
-            throw new Error("Missing creator\n");
-        }
         const newCallList: CallList = {
             id: new Date().valueOf(),
             title: title,
