@@ -5,10 +5,8 @@ import { Outlet } from 'react-router-dom';
 import { ICallList } from '../interfaces';
 import AddCallList from './addCallList';
 import styles from '../callList.module.css';
-import axios from 'axios';
-import addCallList from './addCallList';
 
-const CallListCard: FC = () => {
+const CallListCards: FC = () => {
 
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
@@ -38,6 +36,10 @@ const CallListCard: FC = () => {
         );
     };
 
+  
+
+
+
     return (
         <div className={styles.CallListCard}>
             <SideBar />
@@ -57,4 +59,7 @@ const CallListCard: FC = () => {
     );
 
 };
-export default CallListCard;
+export default CallListCards;
+
+
+  
