@@ -34,17 +34,6 @@ export function makeCallListRouter(callListService : ICallListService): Express.
         return;
     }
         const creator: string = req.body.creator;
-   
-    if (! creator) {
-        res.status(400).send("Missing creator\n");
-        return;
-    }
-
-        const contacts: Array<Contact["id"]> = req.body.contacts;
-    if(contacts.length != 0){
-        res.status(400).send("Contacts should be empty when creating a new callList\n");
-        return;
-    }
         const description: string = req.body.description;
             
         const cl = await callListService;
