@@ -4,13 +4,16 @@ import axios from "axios";
 import SideBar from './sideBar';
 import { NewCallListItemField } from './newCallListItemField';
 import { CallList } from '../../../server/src/model/callList.interface';
-import { Button, Card, Container, InputGroup } from 'react-bootstrap';
+import { Button, Card, Container, InputGroup, Row } from 'react-bootstrap';
 
 interface DashboardProps {
     callLists: CallList[],
+    refreshCallLists: () => void
 }
 
 const sideBar = <SideBar />
+
+
 
 export class Dashboard extends React.Component<DashboardProps, {}> {
     constructor(props: DashboardProps) {
@@ -20,60 +23,83 @@ export class Dashboard extends React.Component<DashboardProps, {}> {
     }
 
     private async addNewCallList(title: string, description?: string) {
-        await axios.put("http://localhost:8080/callList", { title: title, description: description });
+        await axios.post("http://localhost:8080/callList", { title: title, description: description });
+        this.props.refreshCallLists();
     }
 
-    deleteContact = (index: number): void => {
-        //IContactService.deletContact(id)
-        alert('You clicked me!');
-        this.tList = this.tList.slice(index,1)
-      }
+    private deleteCallList = (i: CallList) => {
+        const id = i.id;
+        axios.delete(`http://localhost:8080/callList/${id}`).then(() => { this.props.refreshCallLists(); }
+        );
 
-    tempCl = {
-        tempListItems: [
-            {
-                title: "aa",
-                decription: "bb"
-            }, {
-                title: "cc",
-                decription: "dd"
-            }, {
-                title: "ee",
-                decription: "ff"
-            }, {
-                title: "gg",
-                decription: "hh"
-            }, {
-                title: "ii",
-                decription: "jj"
-            },
-        ]
-    };
-    tList = this.tempCl.tempListItems
+    }
 
-    //byt ut paddingTop
+    private updateCallList = (i: CallList) => {
+        const newTitle = prompt("Enter new title: ");
+        const id = i.id;
+        axios.put("http://localhost:8080/callList", { id: id, title: newTitle }).then(() => { this.props.refreshCallLists(); }
+        );
+    }
+
+    private passContacs = (i: CallList) => {
+        const contacts = i.contacts;
+        
+
+    }
+
+
+
+
+
+    
     override render() {
         return <Container>
+
             <SideBar />
+
             <InputGroup className="mb-3" style={{ paddingTop: "60px" }}>
                 <NewCallListItemField key="new item" addNewCallList={this.addNewCallList} />
-                <Button>Add</Button>
             </InputGroup>
 
-            <Card style={{ width: '18rem' }}>
-                <Card.Body>
-                    <Card.Title>test</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">this is a test text</Card.Subtitle>
-                    <Card.Link href="/callListPage">Go to Call List</Card.Link>
-                    <Button variant="outline-danger" size="sm" style={{ float: 'right' }}
-                        onClick={() => {
-                            //this.deleteContact(index);
-                        }}
-                    >
-                        X
-                    </Button>
-                </Card.Body>
-            </Card>
+            <Row xs={1} md={2} className="mx-auto">
+                {this.props.callLists.map((item, index) => (
+                    <Card style={{ width: '18rem' }} key={index} className="box">
+                        <Card.Img variant="top" src="/telephone.png" />
+                        <Card.Body>
+                            <Card.Title>{item.title}</Card.Title>
+                            <Card.Subtitle>
+                                {item.description}
+                                {item.creator}
+                            </Card.Subtitle>
+                            <Button variant="primary" href="callListPage" onClick={() => {
+                                this.passContacs(item);
+
+                            }}>Go to call list</Button>
+                            <Button variant="outline-danger" size="sm" style={{ float: 'right' }}
+                                onClick={() => {
+                                    this.deleteCallList(item);
+                                    
+
+                                }}
+                            >
+                                X
+                            </Button>
+                            <Button variant="outline-primary" size="sm" style={{ float: 'right' }}
+                                onClick={() => {
+                                    this.updateCallList(item);
+
+                                }}
+                            >
+                                Update
+                            </Button>
+                        </Card.Body>
+                    </Card>
+                )
+                )}
+            </Row>
+
+
+
         </Container>
     }
 }

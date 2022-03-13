@@ -22,7 +22,7 @@ export class CallListService implements ICallListService{
         const newCallList: CallList = {
             id: new Date().valueOf(),
             title: title,
-            creator: creator,
+            creator: "bambi",
             contacts: [],
             description: description
         }
@@ -30,9 +30,9 @@ export class CallListService implements ICallListService{
             
         return newCallList;
     }
-
-    editCallList : (id:number, title: string, creator: string, contacts: Array<Contact["id"]>, description: string) => Promise<CallList> = 
-    async (id:number, title: string, creator: string, contacts: Array<Contact["id"]>, description: string)  => {
+    
+    editCallList : (id:number, title: string, ) => Promise<CallList> = 
+    async (id:number, title: string)  => {
             
             if (id < 0) {
                 throw new Error("Id can't be negative\n");
@@ -40,25 +40,22 @@ export class CallListService implements ICallListService{
             if (! title) {
                 throw new Error("Missing title\n");
             }
-            if (! creator) {
-                throw new Error("Missing creator\n");
-            }
+            
         const callList: CallList = this.callLists[id];
             callList.title = title;
-            callList.creator = creator;
-            callList.contacts = contacts;
-            callList.description = description;
+            
         
         return callList;
     }
+    
 
-    deleteCallList : (id: number) => Promise<Boolean> = async (id: number) => {
-        if (id < 0) {
+    deleteCallList : (id: string) => Promise<Boolean> = async (id: string) => {
+       /* if (id < 0) {
             throw new Error("Id can't be negative\n");
         }
         const callList : CallList = this.callLists[id];
         if (! callList) return false;
-        delete this.callLists[id];
+        delete this.callLists[id];*/
         return true;
     }  
 

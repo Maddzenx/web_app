@@ -2,28 +2,31 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Contact } from '../../server/src/model/contact.interface';
+import { CallList } from '../../server/src/model/callList.interface';
 import axios, { AxiosResponse } from 'axios';
 import { PleaseWait } from './Components/pleaseWait';
-import { CallList } from './Components/callList';
+import { InsideCallList } from './Components/InsideCallList';
 import { Outlet } from 'react-router-dom';
+import { Dashboard } from './Components/dashboard';
 
-export class App extends React.Component<{}, { receivedContacts: boolean, contacts: Contact[] }> {
-  state = { receivedContacts: true, contacts: [] };
+export class App extends React.Component<{}, { receivedCallLists: boolean, callLists: CallList[] }> {
+  state = { receivedCallLists: true, callLists: [] };
 
   override async componentDidMount() {
-    this.refreshCallList();
+    this.refreshCallLists();
   }
 
-  private async refreshCallList() {
-    const res: AxiosResponse<Contact[]> = await axios.get<Contact[]>("http://localhost/8080/callList");
-    this.setState({ receivedContacts: true, contacts: res.data });
+  private async refreshCallLists() {
+    const res: AxiosResponse<CallList[]> = await axios.get<CallList[]>("http://localhost:8080/callList");
+    this.setState({ receivedCallLists: true, callLists: res.data });
   }
 
   override render() {
-    if (this.state.receivedContacts) return <div><CallList contacts = {this.state.contacts} 
-      refreshCallList={() => this.refreshCallList()}
+    
+    if (this.state.receivedCallLists) return <div><Dashboard callLists = {this.state.callLists} 
+      refreshCallLists={() => this.refreshCallLists()}
     />
-    <Outlet context={this.state.contacts} />
+    <Outlet context={this.state.callLists} />
     </div>
     else return <PleaseWait />
   }

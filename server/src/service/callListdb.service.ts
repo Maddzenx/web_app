@@ -9,24 +9,30 @@ class CallListDBService implements ICallListService {
         return await cm.find();
     }
 
+    async getOneCallList(cID: any): Promise<CallList>{
+        const cm = await callListModel;
+        //return await cm.findById(cID) // måste ev lösas med _id ist isf måste jag skicka med objectID
+        const callList = await cm.findOne({_id: cID});
+        if (callList === null)
+            throw new Error("No document with id " + cID);
+        else return callList;
+    }
+
     async createCallList(title: string, creator: string, description: string): Promise<CallList> {
         const cm = await callListModel;
         return await cm.create({
             id : new Date().valueOf(),
             title: title, 
-            creator: creator,
+            creator: "bambi",
             contacts: [],
             decription: description
         })
     }
 
-    async editCallList(clId: number, clTitle: string, clCreator: string, clContacts: Array<Contact["id"]>, clDescription: string): Promise<CallList> {
+    async editCallList(clId: number, clTitle: string): Promise<CallList> {
         const cm = await callListModel;
         await cm.updateOne( {id: clId},
-            {title: clTitle, 
-            creator: clCreator,
-            contacts: clContacts,
-            decription: clDescription});
+            {title: clTitle });
 
         const doc = await cm.findOne({id: clId});
         if (doc === null)
@@ -34,17 +40,18 @@ class CallListDBService implements ICallListService {
         else return doc;
     }
 
-    async deleteCallList(callListId: number): Promise<Boolean> {
+    async deleteCallList(callListId: string): Promise<Boolean> {
         const cm = await callListModel;
-        await cm.findByIdAndDelete(callListId);
-
+        await cm.findOneAndDelete({id:{$gte:5}}).exec() // Denna som inte får in rätt, testa att få in _id ist för id
+        /*
         const doc = await cm.findOne({id: callListId});
 
         if(doc == null){
             return true;
-        } else return false;
+        } else return false;*/
+        return true;
     }
-
+    /*
     //måste fixas
     async addContact(callListId: number): Promise<CallList> {
         const contactId = new Date().valueOf();
@@ -57,7 +64,7 @@ class CallListDBService implements ICallListService {
             if (doc === null)
                 throw new Error("No document with id " + callListId);
             else return doc;
-    }
+    }*/
 }
 
 export const callListDBService = new CallListDBService();

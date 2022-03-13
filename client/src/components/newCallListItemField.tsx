@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 
 export function NewCallListItemField(props: { addNewCallList: (title: string, description: string) => void }) {
   const [title, setTitle] = useState("");
@@ -15,6 +16,7 @@ export function NewCallListItemField(props: { addNewCallList: (title: string, de
       <input type="text" placeholder="Description" required value={description} onChange={(event) => {
         setDescription(event.target.value)
       }}></input>
+      <Button size="sm" type="submit">save</Button>
     </form>
   </li>
 }
