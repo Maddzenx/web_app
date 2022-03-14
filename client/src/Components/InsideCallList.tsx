@@ -55,11 +55,15 @@ export default function InsideCallList() {
     
     await axios.post("http://localhost:8080/contact", {callListID: id, name: name, company: company, position: position, telephoneNumber: telephoneNumber, email: email, comment: comment });
   }
-  const handleDelete = async ()=>{
+  const deleteContact = async (contact: Contact)=>{
+    const id = contact.id;
+    
+    axios.delete(`http://localhost:8080/contact/${id}`).then(() => { }
+    );
 
   }
 
-  const handleUpdate = async ()=>{
+  const updateContact = async (contact: Contact)=>{
     
   }
 
@@ -74,7 +78,24 @@ export default function InsideCallList() {
       <Accordion >
           {currentContacts?.map((item, index) => (
             <AccordionItem eventKey={item.name}>
-              <Accordion.Header>{item.name}: {item.name}</Accordion.Header>
+              <Accordion.Header>{item.name}: {item.name}<Button variant="outline-danger" size="sm" style={{ float: 'right' }}
+                                onClick={() => {
+                                    deleteContact(item);
+                                    
+
+                                }}
+                            >
+                                X
+                            </Button>
+                           
+                            <Button variant="outline-primary" size="sm" style={{ float: 'right' }}
+                                onClick={() => {
+                                    updateContact(item);
+
+                                }}
+                            >
+                                Update
+                            </Button></Accordion.Header>
               <Accordion.Body>
                 {item.name}
                 {item.comment}
@@ -84,6 +105,7 @@ export default function InsideCallList() {
                 {item.status}
                 {item.telephoneNumber}
                 {item.id}
+
               </Accordion.Body>
             </AccordionItem>
           ))}

@@ -130,7 +130,7 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
 
         try {
     
-            const id: number = req.body.id;
+            const id: number = Number(req.params.id);
             
             if (! id) {
             res.status(400).send("Missing id\n");

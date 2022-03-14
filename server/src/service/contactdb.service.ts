@@ -57,8 +57,15 @@ class ContactDBService implements IContactService {
 
     async deleteContact(contactId: number): Promise<Boolean> {
         const cm = await contactModel;
-        cm.findByIdAndDelete(contactId);
-        return true;
+        
+        await cm.findOneAndDelete({ id: (contactId) }).exec() 
+        
+        const doc = await cm.findOne({id: contactId});
+
+        if(doc == null){
+            return true;
+        } else return false;
+        
     }
 }
 
