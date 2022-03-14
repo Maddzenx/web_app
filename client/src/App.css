@@ -4,9 +4,7 @@
 
 body {
   margin: 0%;
-  
-  padding-top: 70px; 
-  width: 100%;
+  padding:0%;
 }
 
 .App-logo {
@@ -38,6 +36,69 @@ body {
 .container{
   width: 100%;
   padding: 0%;
+}
+
+/* dashboard */
+.dashboard{
+  width: 100%;
+  padding-left: 0%;
+  padding-right: 0%;
+}
+
+/* input new CallList */
+.newCallListInputGroup{
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white;
+}
+
+.newCallListInput{
+  display: flex;
+  justify-content: center;
+  padding-top: 80px;
+  
+}
+
+.newCallListTitleInput{
+  margin-right: 2px;
+  margin-top: 15px;
+  vertical-align: middle;
+}
+
+.newCallListDescriptionInput{
+  margin-right: 2px;
+  margin-top: 15px;
+  vertical-align: middle;
+}
+
+.addNewCallListTitle{
+  margin: 0 auto;
+  text-align: center;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.saveCallListBtn{
+  margin-top: 15px;
+}
+
+/* CallList Card */
+
+.callListContainer{
+  display: flex;
+  justify-content: space-around;
+}
+
+.callListDeleteBtn{
+  margin-left: 2px;
+}
+
+.callListCard{
+  margin-top: 1px;
+  margin-bottom: 1px;
+  margin-right: 1px;
+  margin-left: 1px;
 }
 
 

@@ -6,6 +6,7 @@ import { NewCallListItemField } from './newCallListItemField';
 import { CallList } from '../../../server/src/model/callList.interface';
 import { Button, Card, Container, InputGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import '../App.css';
 
 interface DashboardProps {
     callLists: CallList[],
@@ -43,36 +44,30 @@ export class Dashboard extends React.Component<DashboardProps, {}> {
     }
 
     
-
-
-
-
-
-    
     override render() {
         return <Container>
-
             <SideBar />
-
-            <InputGroup className="mb-3" style={{ paddingTop: "60px" }}>
-                <NewCallListItemField key="new item" addNewCallList={this.addNewCallList} />
+        <Container className="newCallListInputGroup">
+            <InputGroup className="newCallListInput">
+                <NewCallListItemField addNewCallList={this.addNewCallList} />
             </InputGroup>
-
-            <Row xs={1} md={2} className="mx-auto">
+        </Container>
+        <Container className="callListContainer" style={{paddingTop: "60px"}}>
+            <Row xs={1} md={2}  >
                 {this.props.callLists.map((item, index) => (
-                    <Card style={{ width: '18rem' }} key={index} className="box">
+                    <Card className= "callListCard" style={{ width: '18rem' }} key={index}>
                         <Card.Img variant="top" src="/telephone.png" />
                         <Card.Body>
                             <Card.Title>
                             <Link to={`/callList/${item.id}`} className="dark" style={{ textDecoration: 'none' }}  >
                             {item.title}
                             </Link></Card.Title>
-                            <Card.Subtitle>
+                            <Card.Subtitle className = "callListCardText">
                                 {item.description}
                                 {item.creator}
                             </Card.Subtitle>
                             
-                            <Button variant="outline-danger" size="sm" style={{ float: 'right' }}
+                            <Button className = "callListDeleteBtn" variant="outline-danger" size="sm" style={{ float: 'right' }}
                                 onClick={() => {
                                     this.deleteCallList(item);
                                     
@@ -82,7 +77,7 @@ export class Dashboard extends React.Component<DashboardProps, {}> {
                                 X
                             </Button>
                            
-                            <Button variant="outline-primary" size="sm" style={{ float: 'right' }}
+                            <Button className = "callListUpdateBtn" variant="outline-primary" size="sm" style={{ float: 'right' }}
                                 onClick={() => {
                                     this.updateCallList(item);
 
@@ -95,7 +90,7 @@ export class Dashboard extends React.Component<DashboardProps, {}> {
                 )
                 )}
             </Row>
-
+        </Container>
 
 
         </Container>
