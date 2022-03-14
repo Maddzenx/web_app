@@ -6,10 +6,12 @@ import { IContactService } from "../service/icontact.service";
 export function makeContactRouter(contactService: IContactService): Express.Express {
     const contactRouter: Express.Express = Express();
 
-    contactRouter.get("/", async (req: Request, res: Response) => {
+    contactRouter.get("/:id", async (req: Request, res: Response) => {
         try {
+            const callListid: number = Number(req.params.id);
+           
             const c = await contactService;
-            const contacts : Array<Contact> = await c.getContact();
+            const contacts : Array<Contact> = await c.getContact(callListid);
 
             res.status(200).send(contacts);
 
@@ -44,7 +46,7 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
             res.status(400).send("Telephone numbers doesn't contain only digits\n");
             return;
         }
-
+        const callListID: number = req.body.callListID;
         const company: string = req.body.company;
         const position: string = req.body.position;
         const email: string = req.body.email;
@@ -56,7 +58,7 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
         const comment: string = req.body.comment;
     
         const c = await contactService;
-        const contact : Contact = await c.createContact(name, company, position, telephoneNumber, email, comment);
+        const contact : Contact = await c.createContact(callListID, name, company, position, telephoneNumber, email, comment);
     
         res.status(201).send(contact);
     

@@ -5,15 +5,16 @@ import { contactModel } from "../db/contact.db";
 
 class ContactDBService implements IContactService {
     
-    async getContact(): Promise<Contact[]> {
+    async getContact(callListID: number): Promise<Contact[]> {  // lägg till callListID attribute på contact i create osv, skicka in callList id när denna callas och skicka tiibaka array med contacts som tillhör den callListen
         const cm = await contactModel;
-        return await cm.find();
+        return await cm.find({callListID:callListID});
     }
 
-    async createContact(name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string): Promise<Contact> {
+    async createContact(callListID: number, name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string): Promise<Contact> {
         const cm = await contactModel;
         return await cm.create({
             id: new Date().valueOf(),
+            callListID: callListID,
             name: name, 
             company: company, 
             position: position, 

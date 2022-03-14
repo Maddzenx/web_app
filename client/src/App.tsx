@@ -17,7 +17,7 @@ export class App extends React.Component<{}, { receivedCallLists: boolean, callL
   }
 
   private async refreshCallLists() {
-    const res: AxiosResponse<CallList[]> = await axios.get<CallList[]>("http://localhost:8080/callList");
+    const res: AxiosResponse<CallList[]> = await axios.get<CallList[]>("http://localhost:8080/callList/getAll");
     this.setState({ receivedCallLists: true, callLists: res.data });
   }
 

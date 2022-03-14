@@ -9,12 +9,12 @@ class CallListDBService implements ICallListService {
         return await cm.find();
     }
 
-    async getOneCallList(cID: number): Promise<CallList>{
+    async getOneCallList(id: number): Promise<CallList>{
         const cm = await callListModel;
-        //return await cm.findById(cID) // måste ev lösas med _id ist isf måste jag skicka med objectID
-        const callList = await cm.findOne({id: cID});
+        const callList = await cm.findOne({id: id});
+        
         if (callList === null)
-            throw new Error("No document with id " + cID);
+            throw new Error("No document with id hype " );
         else return callList;
     }
 

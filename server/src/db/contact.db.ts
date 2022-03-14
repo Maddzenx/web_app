@@ -14,6 +14,14 @@ const contactSchema : Schema = new Schema({
 
         },
 
+        callListID : {
+
+            type : Number,
+
+            required : true,
+
+        },
+
         name : {
 
             type : String,

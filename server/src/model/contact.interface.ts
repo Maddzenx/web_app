@@ -1,5 +1,6 @@
 export interface Contact {
     id: number;
+    callListID: number;
     name: string;
     company: string;
     position: string;

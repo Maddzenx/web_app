@@ -8,7 +8,7 @@ export function makeCallListRouter(callListService: ICallListService): Express.E
     const callListRouter: Express.Express = Express();
 
     /**get calllists**/
-    callListRouter.get("/", async (req: Request, res: Response) => {
+    callListRouter.get("/getAll", async (req: Request, res: Response) => {
         try {
             const cl = await callListService;
             const callLists: Array<CallList> = await cl.getCallList();
@@ -23,10 +23,10 @@ export function makeCallListRouter(callListService: ICallListService): Express.E
     });
 
     /**get one calllist**/
-    callListRouter.get("/:id", async (req: Request, res: Response) => {
+    callListRouter.get("/getOne/:id", async (req: Request, res: Response) => {
         try {
             const cl = await callListService;
-            const id = Number(req.params._id)
+            const id = Number(req.params.id);
             const callList: CallList = await cl.getOneCallList(id);
 
             res.status(200).send(callList);
