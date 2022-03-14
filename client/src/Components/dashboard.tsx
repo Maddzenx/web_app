@@ -88,7 +88,7 @@ export class Dashboard extends React.Component<DashboardProps, {}> {
 
                                 }}
                             >
-                                Update
+                                Edit
                             </Button>
                         </Card.Body>
                     </Card>

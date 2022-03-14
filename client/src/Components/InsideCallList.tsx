@@ -23,20 +23,21 @@ export default function InsideCallList() {
 
 
   useEffect(() => {
-    const getCallList = async () => {
 
-      const res: AxiosResponse<CallList> = await axios.get<CallList>("http://localhost:8080/callList/getOne/" + id);
-      setCallList(res.data);
-    }
-    const getContacts = async () => {
 
-      const res: AxiosResponse<Contact[]> = await axios.get<Contact[]>(`http://localhost:8080/contact/${id}`);
-      setContacts(res.data);
-    }
     getContacts();
     getCallList();
   }, [id]);
+  const getCallList = async () => {
 
+    const res: AxiosResponse<CallList> = await axios.get<CallList>("http://localhost:8080/callList/getOne/" + id);
+    setCallList(res.data);
+  }
+  const getContacts = async () => {
+
+    const res: AxiosResponse<Contact[]> = await axios.get<Contact[]>(`http://localhost:8080/contact/${id}`);
+    setContacts(res.data);
+  }
   /*
   private async addNewContact(name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string) {
     await axios.post("http://localhost:8080/contact", { name: name, company: company, position: position, telephoneNumber: telephoneNumber, email: email, comment: comment });
@@ -53,12 +54,14 @@ export default function InsideCallList() {
   */
   const addNewContact = async (name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string) => {
 
-    await axios.post("http://localhost:8080/contact", { callListID: id, name: name, company: company, position: position, telephoneNumber: telephoneNumber, email: email, comment: comment });
+    await axios.post("http://localhost:8080/contact", { callListID: id, name: name, company: company, position: position, telephoneNumber: telephoneNumber, email: email, comment: comment }).then(() => {
+      getContacts()
+    });
   }
   const deleteContact = async (contact: Contact) => {
     const id = contact.id;
 
-    axios.delete(`http://localhost:8080/contact/${id}`).then(() => { }
+    axios.delete(`http://localhost:8080/contact/${id}`).then(() => { getContacts() }
     );
 
   }
@@ -68,7 +71,7 @@ export default function InsideCallList() {
     const newContactName = prompt("Enter new Contact name: ");
     const newTelephonenumber = prompt("Enter new TelephoneNumber: ");
     const id = contact.id;
-    axios.put("http://localhost:8080/contact", { id: id, newContactName: newContactName, newTelephonenumber: newTelephonenumber }).then(() => { }
+    axios.put("http://localhost:8080/contact", { id: id, newContactName: newContactName, newTelephonenumber: newTelephonenumber }).then(() => { getContacts() }
     );
 
   }
@@ -100,7 +103,7 @@ export default function InsideCallList() {
 
                   }}
                 >
-                  Update
+                  Edit
                 </Button></Accordion.Header>
               <Accordion.Body>
                 {item.name}
