@@ -77,14 +77,14 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
     
         const id: number = req.body.id;
         
-        const name: string = req.body.name;
+        const name: string = req.body.newContactName;
     
         if (! name) {
             res.status(400).send("Missing name\n");
             return;
         }
     
-        const telephoneNumber: string = req.body.telephoneNumber;
+        const telephoneNumber: string = req.body.newTelephonenumber;
             
         if (! telephoneNumber) {
             res.status(400).send("Missing telephoneNumber\n");
@@ -96,12 +96,13 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
             res.status(400).send("Telephone numbers doesn't contain only digits\n");
             return;
         }
+        /*
         const status: number = req.body.status;
             
         if (! status) {
             res.status(400).send("Missing status\n");
             return;
-        }
+        }*//*
 
         const company: string = req.body.company;
         const position: string = req.body.position;
@@ -113,9 +114,10 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
         }
 
         const comment: string = req.body.comment;
+        */
     
         const c = await contactService;
-        const contact : Contact = await c.editContact(id, name, company, position, telephoneNumber, email, status, comment);
+        const contact : Contact = await c.editContact(id, name, telephoneNumber); // Fixa så att en kan edita allt sen
     
         res.status(201).send(contact);
     

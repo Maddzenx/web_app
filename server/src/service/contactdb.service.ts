@@ -26,15 +26,14 @@ class ContactDBService implements IContactService {
         );
     }
 
-    async editContact(id: number, name: string, company: string, position: string, telephoneNumber: string, email: string, status: number, comment: string): Promise<Contact> {
+    async editContact(id: number, name: string, telephoneNumber: string): Promise<Contact> {
         const cm = await contactModel;
         await cm.updateOne({id: id},
             {name: name, 
-            company: company,
-            position: position,
+            
+            
             telephoneNumber: telephoneNumber, 
-            email: email, 
-            comment: comment
+            
         });
 
         const doc = await cm.findOne({id: id});
