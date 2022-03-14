@@ -42,11 +42,7 @@ export class Dashboard extends React.Component<DashboardProps, {}> {
         );
     }
 
-    private passContacs = (i: CallList) => {
-        const contacts = i.contacts;
-        
-
-    }
+    
 
 
 
@@ -67,15 +63,15 @@ export class Dashboard extends React.Component<DashboardProps, {}> {
                     <Card style={{ width: '18rem' }} key={index} className="box">
                         <Card.Img variant="top" src="/telephone.png" />
                         <Card.Body>
-                            <Card.Title>{item.title}</Card.Title>
+                            <Card.Title>
+                            <Link to={`/callList/${item.id}`} className="dark" style={{ textDecoration: 'none' }}  >
+                            {item.title}
+                            </Link></Card.Title>
                             <Card.Subtitle>
                                 {item.description}
                                 {item.creator}
                             </Card.Subtitle>
-                            <Button variant="primary" href="callListPage" onClick={() => {
-                                this.passContacs(item);
-
-                            }}>Go to call list</Button>
+                            
                             <Button variant="outline-danger" size="sm" style={{ float: 'right' }}
                                 onClick={() => {
                                     this.deleteCallList(item);
@@ -85,9 +81,7 @@ export class Dashboard extends React.Component<DashboardProps, {}> {
                             >
                                 X
                             </Button>
-                            <Link to={`/callList/${item.id}`} className="link">
-                                hej
-                            </Link>
+                           
                             <Button variant="outline-primary" size="sm" style={{ float: 'right' }}
                                 onClick={() => {
                                     this.updateCallList(item);
