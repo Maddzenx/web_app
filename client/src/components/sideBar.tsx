@@ -16,7 +16,7 @@ export function SideBar() {
           <Container fluid>
             <Navbar.Brand>Name</Navbar.Brand>
             <Nav className="me-auto">
-              <Nav.Link href="startPage">Dashboard</Nav.Link> 
+              <Nav.Link href="dashboard">Dashboard</Nav.Link> 
               <Nav.Link href="callListPage">Profile</Nav.Link>
               <Nav.Link href="#pricing">Sign Out</Nav.Link>
             </Nav>

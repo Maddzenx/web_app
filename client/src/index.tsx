@@ -12,27 +12,26 @@ import { StartPage } from './Components/startPage';
 import CallListCards from './Components/callListCards';
 import { Dashboard } from './Components/dashboard';
 import InsideCallList from './Components/InsideCallList';
+import Register from './Components/register';
 
 
 //Kan va viktigt med context provider för att saker skall funka
 ReactDOM.render(
   <React.StrictMode>
-   
+
     <BrowserRouter>
       <Routes>
-      <Route path="/" element={<StartPage />}> 
-      </Route>
-      <Route path="/callListPage" element={<App />}>
-          <Route path=":addContact" element={<p>addContactView</p>} />
-          <Route path=":expandContact" element={<ContactView />} />
+        <Route path="/" element={<StartPage />}>
         </Route>
-        <Route path="/callList/:callListId" element={<InsideCallList/>}> 
-        
+        <Route path="/dashboard" element={<App />}>
         </Route>
-       
+        <Route path="/callList/:callListId" element={<InsideCallList />}>
+        </Route>
+        <Route path="/user" element={<Register />}>
+        </Route>
       </Routes>
     </BrowserRouter>
-   
+
   </React.StrictMode>,
   document.getElementById('root')
 );

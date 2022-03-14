@@ -7,8 +7,8 @@ import SuperTest from "supertest";
 
 test("A GET request to / should send a response with the list of contacts", () => {
     const listOfContacts : Contact[] = [
-        {id: 1, name: "Contact 1", company: "", position: "", telephoneNumber: "12345", email: "yoyo@gmail.com", status: 2, comment: ""},
-        {id: 2, name: "Contact 2", company: "", position: "", telephoneNumber: "56789", email: "yoyo@gmail.com", status: 1, comment: ""}
+        {callListID: 20, id: 1, name: "Contact 1", company: "", position: "", telephoneNumber: "12345", email: "yoyo@gmail.com", status: 2, comment: ""},
+        {callListID: 10, id: 2, name: "Contact 2", company: "", position: "", telephoneNumber: "56789", email: "yoyo@gmail.com", status: 1, comment: ""}
     ];
 
 
@@ -17,10 +17,10 @@ class MockContactService implements IContactService {
         getContact(): Promise<Contact[]> {
             throw new Error("Method not implemented.");
         }
-        createContact(name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string): Promise<Contact> {
+        createContact(callListID: number, name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string): Promise<Contact> {
             throw new Error("Method not implemented.");
         }
-        editContact(id: number, name: string, company: string, position: string, telephoneNumber: string, email: string, status: number, comment: string): Promise<Contact> {
+        editContact(id: number, name: string, telephoneNumber: string): Promise<Contact> {
             throw new Error("Method not implemented.");
         }
         changeStatus(id: number, status: number): Promise<Contact> {
