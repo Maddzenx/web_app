@@ -26,7 +26,7 @@ export function makeCallListRouter(callListService: ICallListService): Express.E
     callListRouter.get("/:id", async (req: Request, res: Response) => {
         try {
             const cl = await callListService;
-            const id = req.params._id
+            const id = Number(req.params._id)
             const callList: CallList = await cl.getOneCallList(id);
 
             res.status(200).send(callList);
@@ -117,7 +117,7 @@ export function makeCallListRouter(callListService: ICallListService): Express.E
 
         try {
 
-            const id: string = req.params.id;
+            const id: number = Number(req.params.id);
 
             if (!id) {
                 res.status(400).send("Missing id\n");

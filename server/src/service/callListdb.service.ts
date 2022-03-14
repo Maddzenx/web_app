@@ -9,10 +9,10 @@ class CallListDBService implements ICallListService {
         return await cm.find();
     }
 
-    async getOneCallList(cID: any): Promise<CallList>{
+    async getOneCallList(cID: number): Promise<CallList>{
         const cm = await callListModel;
         //return await cm.findById(cID) // måste ev lösas med _id ist isf måste jag skicka med objectID
-        const callList = await cm.findOne({_id: cID});
+        const callList = await cm.findOne({id: cID});
         if (callList === null)
             throw new Error("No document with id " + cID);
         else return callList;
@@ -40,17 +40,17 @@ class CallListDBService implements ICallListService {
         else return doc;
     }
    
-    async deleteCallList(callListId: string): Promise<Boolean> {
+    async deleteCallList(callListId: number): Promise<Boolean> {
         const cm = await callListModel;
         
-        await cm.findOneAndDelete({ id: Number(callListId) }).exec() 
-        /*
+        await cm.findOneAndDelete({ id: (callListId) }).exec() 
+        
         const doc = await cm.findOne({id: callListId});
 
         if(doc == null){
             return true;
-        } else return false;*/
-        return true;
+        } else return false;
+        
     }
     /*
     //måste fixas
