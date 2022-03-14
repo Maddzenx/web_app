@@ -23,7 +23,7 @@ export class App extends React.Component<{}, { receivedCallLists: boolean, callL
 
   override render() {
     
-    if (this.state.receivedCallLists) return <div><Dashboard callLists = {this.state.callLists} 
+    if (this.state.receivedCallLists) return <div className="dashboard"><Dashboard callLists = {this.state.callLists} 
       refreshCallLists={() => this.refreshCallLists()}
     />
     <Outlet context={this.state.callLists} />
