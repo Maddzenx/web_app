@@ -39,10 +39,11 @@ class CallListDBService implements ICallListService {
             throw new Error("No document with id " + clId);
         else return doc;
     }
-
+   
     async deleteCallList(callListId: string): Promise<Boolean> {
         const cm = await callListModel;
-        await cm.findOneAndDelete({id:{$gte:5}}).exec() // Denna som inte får in rätt, testa att få in _id ist för id
+        
+        await cm.findOneAndDelete({ id: Number(callListId) }).exec() 
         /*
         const doc = await cm.findOne({id: callListId});
 

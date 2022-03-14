@@ -9,6 +9,9 @@ export class CallListService implements ICallListService{
     constructor(callLists: { [key: number]: CallList }) {
         this.callLists = callLists;
     }
+    getOneCallList(id: any): Promise<CallList> {
+        throw new Error("Method not implemented.");
+    }
 
     getCallList : () => Promise<Array<CallList>> = async () => {
         return Object.values(this.callLists);
