@@ -11,7 +11,8 @@ import { ContactView } from './Components/contactView';
 import { StartPage } from './Components/startPage';
 import CallListCards from './Components/callListCards';
 import { Dashboard } from './Components/dashboard';
-import { InsideCallList } from './Components/InsideCallList';
+import InsideCallList from './Components/InsideCallList';
+
 
 //Kan va viktigt med context provider för att saker skall funka
 ReactDOM.render(
@@ -25,7 +26,7 @@ ReactDOM.render(
           <Route path=":addContact" element={<p>addContactView</p>} />
           <Route path=":expandContact" element={<ContactView />} />
         </Route>
-        <Route path="/callList/:callListId">
+        <Route path="/callList/:callListId" element={<InsideCallList/>}> 
         
         </Route>
        

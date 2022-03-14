@@ -5,6 +5,7 @@ import SideBar from './sideBar';
 import { NewCallListItemField } from './newCallListItemField';
 import { CallList } from '../../../server/src/model/callList.interface';
 import { Button, Card, Container, InputGroup, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 interface DashboardProps {
     callLists: CallList[],
@@ -84,6 +85,9 @@ export class Dashboard extends React.Component<DashboardProps, {}> {
                             >
                                 X
                             </Button>
+                            <Link to={`/callList/${item.id}`} className="link">
+                                hej
+                            </Link>
                             <Button variant="outline-primary" size="sm" style={{ float: 'right' }}
                                 onClick={() => {
                                     this.updateCallList(item);

@@ -5,7 +5,7 @@ import { Contact } from '../../server/src/model/contact.interface';
 import { CallList } from '../../server/src/model/callList.interface';
 import axios, { AxiosResponse } from 'axios';
 import { PleaseWait } from './Components/pleaseWait';
-import { InsideCallList } from './Components/InsideCallList';
+
 import { Outlet } from 'react-router-dom';
 import { Dashboard } from './Components/dashboard';
 
