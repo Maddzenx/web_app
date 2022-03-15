@@ -8,10 +8,11 @@ export function makeCallListRouter(callListService: ICallListService): Express.E
     const callListRouter: Express.Express = Express();
 
     /**get calllists**/
-    callListRouter.get("/getAll", async (req: Request, res: Response) => {
+    callListRouter.get("/getAll/:username", async (req: Request, res: Response) => {
         try {
+            const username = req.params.username;
             const cl = await callListService;
-            const callLists: Array<CallList> = await cl.getCallList();
+            const callLists: Array<CallList> = await cl.getCallList(username);
 
             res.status(200).send(callLists);
 
@@ -44,12 +45,20 @@ export function makeCallListRouter(callListService: ICallListService): Express.E
         try {
 
             const title: string = req.body.title;
+            const description: string = req.body.description;
+            const creator: string = req.body.username;
 
             if (!title) {
                 res.status(400).send("Missing title\n");
                 return;
             }
-            const creator: string = req.body.creator;
+            
+            
+            if (! description) {
+                res.status(400).send("Missing creator\n");
+                return;
+            }
+
             /*
             if (! creator) {
                 res.status(400).send("Missing creator\n");
@@ -57,10 +66,10 @@ export function makeCallListRouter(callListService: ICallListService): Express.E
             }
         */ 
 
-            const description: string = req.body.description;
+           
 
             const cl = await callListService;
-            const callList: CallList = await cl.createCallList(title, creator, description);
+            const callList: CallList = await cl.createCallList(title,  description, creator); // Ev behövs user här
 
             res.status(201).send(callList);
 
@@ -78,12 +87,14 @@ export function makeCallListRouter(callListService: ICallListService): Express.E
         try {
 
             const id: number = req.body.id;
+            const title: string = req.body.title;
+            
 
             if (!id) {
                 res.status(400).send("Missing id\n");
                 return;
             }
-            const title: string = req.body.title;
+            
 
             if (!title) {
                 res.status(400).send("Missing title\n");

@@ -1,72 +1,3 @@
-/*import express, { Request, Response} from "express";
-
-import { CallList } from "../model/callList.interface";
-import { User } from "../model/user.interface";
-import * as UserService from "../service/user.service";
-
-
-export const userRouter = express.Router();
-
-
-userRouter.post("/", async (req: Request, res: Response) => {
-
-    try {
-   
-    const username: string = req.body.username;
-   
-   
-    if (! username) {
-   
-    res.status(400).send("Missing username\n");
-   
-    return;
-   
-    }
-
-    const email: string = req.body.email;
-   
-   
-   
-    if (! email) {
-   
-    res.status(400).send("Missing email\n");
-   
-    return;
-   
-    }
-
-    const password: string = req.body.password;
-        
-    if (! password) {
-    
-    res.status(400).send("Missing password\n");
-    
-    return;
-    
-    }
-   
-    const callLists: Array<CallList> = req.body.callLists;
-        
-    if (! callLists) {
-    
-    res.status(400).send("Missing callLists\n");
-    
-    return;
-    
-    }
-   
-    const user : User = await UserService.createUser(username, email, password, callLists);
-   
-    res.status(201).send(user);
-   
-    } catch (e : any) {
-   
-    res.status(500).send(e.message);
-   
-    }
-   
-   });*/
-
 import Express, { Request, Response } from "express";
 import { CallList } from "../model/callList.interface";
 import { User } from "../model/user.interface";
@@ -74,8 +5,7 @@ import { IUserService } from "../service/iuser.service";
 import { userDBService } from "../service/userdb.service";
 
 export function makeUserRouter(userService: IUserService): Express.Express {
-
-    const userRouter = require("express").Router();
+    const userRouter: Express.Express = Express();
     const bcrypt = require("bcrypt");
 
     //Create user
@@ -83,23 +13,29 @@ export function makeUserRouter(userService: IUserService): Express.Express {
 
         try {
             const username: string = req.body.username;
+            const email: string = req.body.email;
+            const password: string = req.body.password;
             if (!username) {
                 res.status(400).send("Missing username\n");
                 return;
             }
-            const email: string = req.body.email;
+            
             if (!email) {
                 res.status(400).send("Missing email\n");
                 return;
             }
-            const salt = await bcrypt.genSalt(10);
-            const hashedPass = await bcrypt.hash(req.body.password, salt);
-
-            if (!hashedPass) {
+            if (!password) {
                 res.status(400).send("Missing password\n");
                 return;
+
             }
-            const user: User = await userService.createUser(username, email, hashedPass);
+            /*    Denna säkerhets krypteringen fungerar inte av någon anledning
+            const salt = await bcrypt.genSalt(10);
+            const hashedPass = await bcrypt.hash(password, salt);
+            */
+
+            
+            const user: User = await userService.createUser(username, email, password);
             res.status(201).send(user);
 
         } catch (e: any) {
@@ -110,22 +46,26 @@ export function makeUserRouter(userService: IUserService): Express.Express {
     //Log in user
     userRouter.post("/login", async (req: Request, res: Response) => {
         try {
-            const email: string = req.body.email;
-            if (!email) {
+            const username: string = req.body.username;
+            const password: string = req.body.password;
+            if (!username) {
                 res.status(400).send("Missing email\n");
                 return;
             }
-            const salt = await bcrypt.genSalt(10);
-            const hashedPass = await bcrypt.hash(req.body.password, salt);
-
-            if (!hashedPass) {
+            
+            if (!password) {
                 res.status(400).send("Missing password\n");
                 return;
             }
-            const success: User = await userService.logInUser(email, hashedPass);
-            res.status(201).send(success);
+            
+            const user: User = await userService.logInUser(username, password);
+            res.status(201).send(user);
 
             // KOLLA UPP OM DETTA SKA MED !!!
+             /*
+            const salt = await bcrypt.genSalt(10);
+            const hashedPass = await bcrypt.hash(req.body.password, salt);
+            */
             //const { password, ...others } = success._doc;
             //res.status(200).send(success);
 

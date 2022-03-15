@@ -20,6 +20,7 @@ class UserDBService implements IUserService {
             throw new Error("Missing password\n");
         }
         const us = await userModel;
+        
         return await us.create({
             id: new Date().valueOf(),
             username: username,
@@ -28,19 +29,19 @@ class UserDBService implements IUserService {
         })
     }
 
-    async logInUser(email: string, password: string): Promise<User> {
-
-        if (!email) {
+    async logInUser(username: string, password: string): Promise<User> {
+        /*
+        if (!username) {
             throw new Error("Missing email\n");
         }
         if (!password) {
             throw new Error("Missing password\n");
-        }
+        }*/
         const us = await userModel;
-        const doc = await us.findOne({ email: email, password: password });
+        const doc = await us.findOne({username: username});
 
         if (doc === null)
-            throw new Error("No account with email " + email);
+            throw new Error("No account with username " + username+ " or wrong password");
         else return doc;
     }
 

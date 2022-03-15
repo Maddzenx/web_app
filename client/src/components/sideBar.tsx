@@ -17,8 +17,7 @@ export function SideBar() {
             <Navbar.Brand>Name</Navbar.Brand>
             <Nav className="me-auto">
               <Nav.Link href="dashboard">Dashboard</Nav.Link> 
-              <Nav.Link href="callListPage">Profile</Nav.Link>
-              <Nav.Link href="#pricing">Sign Out</Nav.Link>
+              <Nav.Link href="/">Sign Out</Nav.Link>
             </Nav>
           </Container>
         </Navbar>

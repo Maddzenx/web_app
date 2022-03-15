@@ -4,9 +4,9 @@ import { Contact } from "../model/contact.interface";
 import { CallList } from "../model/callList.interface";
 
 class CallListDBService implements ICallListService {
-    async getCallList(): Promise<CallList[]> {
+    async getCallList(username: string): Promise<CallList[]> {
         const cm = await callListModel;
-        return await cm.find();
+        return await cm.find({creator:username});
     }
 
     async getOneCallList(id: number): Promise<CallList>{
@@ -18,12 +18,12 @@ class CallListDBService implements ICallListService {
         else return callList;
     }
 
-    async createCallList(title: string, creator: string, description: string): Promise<CallList> {
+    async createCallList(title: string, description: string, creator: string): Promise<CallList> {
         const cm = await callListModel;
         return await cm.create({
             id : new Date().valueOf(),
             title: title, 
-            creator: "bambi",
+            creator: creator,
             contacts: [],
             decription: description
         })
