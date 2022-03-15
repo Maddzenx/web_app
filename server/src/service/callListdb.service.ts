@@ -8,6 +8,7 @@ class CallListDBService implements ICallListService {
         return await cm.find({ creator: username });
     }
 
+
     async getOneCallList(id: number): Promise<CallList> {
         const cm = await callListModel;
         const callList = await cm.findOne({ id: id });
@@ -18,6 +19,7 @@ class CallListDBService implements ICallListService {
     }
 
     async createCallList(title: string, description: string, creator: string): Promise<CallList> {
+
         const cm = await callListModel;
         return await cm.create({
             id: new Date().valueOf(),
@@ -28,7 +30,9 @@ class CallListDBService implements ICallListService {
         })
     }
 
+
     async editCallList(clId: number, clTitle: string): Promise<CallList> {
+
         const cm = await callListModel;
         await cm.updateOne({ id: clId },
             { title: clTitle });
@@ -40,6 +44,9 @@ class CallListDBService implements ICallListService {
     }
 
     async deleteCallList(callListId: number): Promise<Boolean> {
+        if (callListId < 0) {
+            throw new Error("Id can't be negative\n");
+        }
         const cm = await callListModel;
 
         await cm.deleteOne({ id: (callListId) }).exec()
@@ -49,6 +56,8 @@ class CallListDBService implements ICallListService {
         if (doc == null) {
             return true;
         } else return false;
+
+
 
     }
 

@@ -7,9 +7,10 @@ import { callListDBService } from "../service/callListdb.service";
 export function makeCallListRouter(callListService: ICallListService): Express.Express {
     const callListRouter: Express.Express = Express();
 
+
     /**get calllists**/
     callListRouter.get("/getAll/:username", async (req: Request, res: Response) => {
-        try {
+        try { 
             const username = req.params.username;
             const cl = await callListService;
             const callLists: Array<CallList> = await cl.getCallList(username);
@@ -51,8 +52,7 @@ export function makeCallListRouter(callListService: ICallListService): Express.E
             if (!title) {
                 res.status(400).send("Missing title\n");
                 return;
-            }
-            
+            }    
             
             if (! description) {
                 res.status(400).send("Missing creator\n");
