@@ -13,6 +13,10 @@ test("A GET request to / should send a response with the list of callLists", () 
     ];
 
 class MockCallListService implements ICallListService {
+        async getOneCallList(id: number): Promise<CallList> {
+            id = 1;
+            return listOfCallLists.at(0) as any;
+        }
 
         getCallList : () => Promise<CallList[]> = async () => {
             return listOfCallLists;
@@ -23,25 +27,19 @@ class MockCallListService implements ICallListService {
         }
 
         createCallList(title: string, creator: string, description: string): Promise<CallList> {
-            // expect(0).toBe(1);
-            throw new Error("Method not implemented.");
-
+            expect(0).toBe(1);
+            return null as any;
         }
 
         editCallList(id: number, title: string): Promise<CallList> {
-            throw new Error("Method not implemented.");
+            expect(0).toBe(1);
+            return null as any;
         }
 
         deleteCallList(id: number): Promise<Boolean> {
-            throw new Error("Method not implemented.");
+            expect(0).toBe(1);
+            return null as any;
         }
-
-        addContact(callListId: number): Promise<CallList> {
-            throw new Error("Method not implemented.");
-        }
-        
-    
-
     }
 
     const cs : MockCallListService = new MockCallListService();
@@ -52,8 +50,13 @@ class MockCallListService implements ICallListService {
     const request : SuperTest.SuperTest<SuperTest.Test> = 
         SuperTest(router);
 
-    request.get("/").then((res) => {
+    request.get("/getAll").then((res) => {
         expect(res.statusCode).toBe(200);
         expect(res.body).toEqual(listOfCallLists);
+    });
+
+    request.get("/getOne/:id").then((res) => {
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toEqual(listOfCallLists.at(0));
     });
 });

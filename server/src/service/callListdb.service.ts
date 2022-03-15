@@ -14,7 +14,7 @@ class CallListDBService implements ICallListService {
         const callList = await cm.findOne({id: id});
         
         if (callList === null)
-            throw new Error("No document with id hype " );
+            throw new Error("No document with id type" );
         else return callList;
     }
 
@@ -32,7 +32,7 @@ class CallListDBService implements ICallListService {
     async editCallList(clId: number, clTitle: string): Promise<CallList> {
         const cm = await callListModel;
         await cm.updateOne( {id: clId},
-            {title: clTitle });
+            {title: clTitle});
 
         const doc = await cm.findOne({id: clId});
         if (doc === null)
@@ -43,7 +43,7 @@ class CallListDBService implements ICallListService {
     async deleteCallList(callListId: number): Promise<Boolean> {
         const cm = await callListModel;
         
-        await cm.findOneAndDelete({ id: (callListId) }).exec() 
+        await cm.deleteOne({ id: (callListId) }).exec() 
         
         const doc = await cm.findOne({id: callListId});
 
