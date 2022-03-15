@@ -1,4 +1,3 @@
-import { Contact } from '../../../server/src/model/contact.interface';
 import React, { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from "axios";
 import SideBar from './sideBar';

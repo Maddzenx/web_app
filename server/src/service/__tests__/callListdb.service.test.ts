@@ -5,7 +5,7 @@ jest.mock("../../db/conn");
 
 /**getCallList */
 test("getCallList when callList is empty should return the empty list", () => {
-    return callListDBService.getCallList().then(
+    return callListDBService.getCallList("user").then(
         (callLists: CallList[]) => {
             expect(callLists).toEqual([]);
         })
@@ -23,32 +23,32 @@ test("getOneCallList should return the wanted callList", async () => {
 
 /**createCallList */
 test("The array contacts of callList should be empty when creating a new callList", () => {
-    return callListDBService.createCallList("callList test", "user", "").then(async (callList : CallList) => {
-            expect(callList.contacts.length).toBe(0);
-        })
+    return callListDBService.createCallList("callList test", "user", "").then(async (callList: CallList) => {
+        expect(callList.contacts.length).toBe(0);
+    })
 
-    });
+});
 test("Creating a callList should return a callList with its given arguments", async () => {
-        return callListDBService.createCallList("title", "user", "description").then((callList : CallList) => {
-            expect(callList.title).toEqual("title");
-            //expect(callList.description).toEqual("description");
-            expect(callList.contacts).toEqual([]);
-        })
-    });
+    return callListDBService.createCallList("title", "user", "description").then((callList: CallList) => {
+        expect(callList.title).toEqual("title");
+        //expect(callList.description).toEqual("description");
+        expect(callList.contacts).toEqual([]);
+    })
+});
 
 /**editCallList */
 test("Editing a callList should return ", async () => {
     const callList = await callListDBService.createCallList("test", "", "yo")
-    return callListDBService.editCallList(callList.id, "changed").then(async (callList : CallList) => {
-            expect(callList.title).toEqual("changed");
-            //expect(callList.description).toEqual("description");
-            expect(callList.contacts).toEqual([]);
-        })
+    return callListDBService.editCallList(callList.id, "changed").then(async (callList: CallList) => {
+        expect(callList.title).toEqual("changed");
+        //expect(callList.description).toEqual("description");
+        expect(callList.contacts).toEqual([]);
+    })
 
-    });
+});
 
 
-/**deleteCallList*/ 
+/**deleteCallList*/
 test("When calling deleteCallist it should return true", async () => {
     const callList = await callListDBService.createCallList("test", "", "");
     return expect(callListDBService.deleteCallList(callList.id)).resolves.toBe(true);

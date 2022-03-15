@@ -30,15 +30,15 @@ class UserDBService implements IUserService {
     }
 
     async logInUser(username: string, password: string): Promise<User> {
-        /*
+        
         if (!username) {
             throw new Error("Missing email\n");
         }
         if (!password) {
             throw new Error("Missing password\n");
-        }*/
+        }
         const us = await userModel;
-        const doc = await us.findOne({username: username});
+        const doc = await us.findOne({username: username, password: password});
 
         if (doc === null)
             throw new Error("No account with username " + username+ " or wrong password");

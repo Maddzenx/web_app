@@ -16,7 +16,7 @@ import Register from './Components/register';
 //Kan va viktigt med context provider för att saker skall funka
 ReactDOM.render(
   <React.StrictMode>
-    
+
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<StartPage />}>
@@ -29,7 +29,7 @@ ReactDOM.render(
         </Route>
       </Routes>
     </BrowserRouter>
-   
+
 
   </React.StrictMode>,
   document.getElementById('root')

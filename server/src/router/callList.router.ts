@@ -101,15 +101,6 @@ export function makeCallListRouter(callListService: ICallListService): Express.E
                 return;
             }
             
-            /*
-            if (!creator) {
-                res.status(400).send("Missing creator\n");
-                return;
-            }
-
-            const contacts: Array<Contact["id"]> = req.body.contacts;  OBS!!!! Istället för att updatera contact här kan vi göra det i en egen put
-            const decription: string = req.body.decription;
-            */
 
             const cl = await callListService;
             const callList: CallList = await cl.editCallList(id, title);
@@ -148,33 +139,6 @@ export function makeCallListRouter(callListService: ICallListService): Express.E
 
     });
 
-
-    //Add contact to call list
-    /*
-    callListRouter.put("/", async (req: Request, res: Response) => {
-
-        try {
-
-            const callListId: CallList["id"] = req.body.callListId;
-
-            if (!callListId) {
-                res.status(400).send("Missing callList Id\n");
-                return;
-            }
-
-            const cl = await callListService;
-            const isAdded: CallList = await cl.addContact(callListId);
-
-            res.status(201).send(isAdded);
-
-        } catch (e: any) {
-
-            res.status(500).send(e.message);
-
-        }
-
-    });
-    */
     return callListRouter;
 }
 export function callListRouter(): Express.Express {

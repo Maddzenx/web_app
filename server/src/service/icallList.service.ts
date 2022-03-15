@@ -8,5 +8,5 @@ getOneCallList(id: number) : Promise<CallList>
 createCallList(title: string, decription: string, creator:string) : Promise<CallList>
 editCallList(id: number, title:string) : Promise<CallList>
 deleteCallList(id: number) : Promise<Boolean>
-//addContact(callListId : CallList["id"]) : Promise<CallList>
+
 }

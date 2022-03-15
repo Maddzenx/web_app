@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
+import { Button, Container, InputGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
-//import "./register.css";
+
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -9,8 +10,8 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
-  const handleSubmit = async (e:any) => {
-    
+  const handleSubmit = async (e: any) => {
+
     e.preventDefault();
     setError(false);
     try {
@@ -20,46 +21,52 @@ export default function Register() {
         password: password
       });
       res.data && window.location.replace("/");
-    } catch (e:any) {
+    } catch (e: any) {
       setError(true);
     }
   };
-  
+
   return (
-    <div className="register">
-      <span className="registerTitle">Register</span>
-      <form className="registerForm" onSubmit={handleSubmit}>
-        <label>Username</label>
-        <input
-          type="text"
-          className="registerInput"
-          placeholder="Enter your username..."
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label>Email</label>
-        <input
-          type="text"
-          className="registerInput"
-          placeholder="Enter your email..."
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          className="registerInput"
-          placeholder="Enter your password..."
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button className="registerButton" type="submit">
-          Register
-        </button>
-      </form>
-      <button className="registerLoginButton">
-        <Link className="link" to="/login">
-          Login
-        </Link>
-      </button>
-      {error && <span style={{color:"red", marginTop:"10px"}}>Something went wrong!</span>}
+    <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+      <h1 className="LoginTitel">Create new user</h1>
+      <Container className="callListContainer" style={{ paddingTop: "60px" }}>
+
+        <InputGroup>
+
+          <form className="registerForm" onSubmit={handleSubmit}>
+
+            <input
+              type="text"
+              className="registerInput"
+              placeholder="Enter your username"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+
+            <input
+              type="email"
+              className="registerInput"
+              placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <input
+              type="password"
+              className="registerInput"
+              placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button className="registerButton" type="submit">
+              Register
+            </Button>
+          </form>
+
+          <Link className="link" to="/">
+            Back to Login page
+          </Link>
+
+          {error && <span style={{ color: "red", marginTop: "10px" }}>Something went wrong!</span>}
+        </InputGroup>
+      </Container>
     </div>
   );
 }

@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 import axios from 'axios';
-import { Button, Container, InputGroup } from 'react-bootstrap';
+import {  Container, InputGroup } from 'react-bootstrap';
 import { LoginItemField } from './loginItemField';
 import { Link } from 'react-router-dom';
 
@@ -57,10 +57,11 @@ class LogInPageComponent extends React.Component<any, any> {
                                 <Container className="newCallListInputGroup">
                                     <InputGroup className="newCallListInput">
                                         <LoginItemField newLogin={this.onLogIn} />
+                                        <Link to={"/register"} className="dark" style={{ textDecoration: 'none' }}  >
+                                            Register new account
+                                        </Link>
                                     </InputGroup>
-                                    <Link to={"/register"} className="dark" style={{ textDecoration: 'none' }}  >
-                                        Register new account
-                                    </Link>
+
                                 </Container>
 
 

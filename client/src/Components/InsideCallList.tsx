@@ -23,8 +23,6 @@ export default function InsideCallList() {
 
 
   useEffect(() => {
-
-
     getContacts();
     getCallList();
   }, [id]);
@@ -63,55 +61,61 @@ export default function InsideCallList() {
 
   }
 
-  return (
-    <ul><SideBar />
-
-      <Container style={{ paddingTop: "60px" }}>
-        ID:{id}
-        CurrentCallList: {currentCallList?.title}
-        <NewContactItemField key="new item" addNewContact={addNewContact} />
-
-        <Accordion >
-          {currentContacts?.map((item, index) => (
-            <AccordionItem eventKey={item.name}>
-              <Accordion.Header>{item.name}: {item.name}<Button variant="outline-danger" size="sm" style={{ float: 'right' }}
-                onClick={() => {
-                  deleteContact(item);
-
-
-                }}
-              >
-                X
-              </Button>
-
-                <Button variant="outline-primary" size="sm" style={{ float: 'right' }}
+  return (<Container>
+    <SideBar />
+  
+        <Container className = "contactContainer" style={{ paddingTop: "60px" }}>
+          <h1 className="callListTitle">{currentCallList?.title}</h1> 
+          <h6 className="createContactText">Create new contact:</h6>
+          <NewContactItemField key="new item" addNewContact={addNewContact} />
+          </Container>
+  
+        <Container>
+          <Accordion >
+            {currentContacts?.map((item, index) => (
+            <Container className="accordionItem">  
+              <AccordionItem eventKey={item.name}>
+                <Accordion.Header> {item.name}
+                <Container className="accordionBtns">
+                <Button className="editContactBtn" variant="outline-primary" size="sm" style={{ float: 'right' }}
+                    onClick={() => {
+                      updateContact(item);
+  
+                    }}
+                  >
+                    Edit
+                  </Button>
+                <Button className="deleteContactBtn" variant="outline-danger" size="sm" style={{ float: 'right' }}
                   onClick={() => {
-                    updateContact(item);
-
+                    deleteContact(item);
+  
+  
                   }}
                 >
-                  Edit
-                </Button></Accordion.Header>
-              <Accordion.Body>
-                <Row xs={1} md={2}  >
-                  Name: {item.name}
-                  Comment: {item.comment}
-                  Company: {item.company}
-                  Email: {item.email}
-                  Position: {item.position}
-                  Status: {item.status}
-                  Number: {item.telephoneNumber}
-
-                </Row>
-              </Accordion.Body>
-            </AccordionItem>
-          ))}
-        </Accordion>
-
+                  X
+                </Button>
+                  </Container>
+                  </Accordion.Header>
+                
+                  
+                <Accordion.Body>
+                
+                <Container className="insideAccordionContact">
+                  <div><h6>name: </h6>{item.name}</div>
+                  <div><h6>phone nr: </h6>{item.telephoneNumber}</div>
+                  <div><h6>email: </h6>{item.email}</div>
+                  <div><h6>company: </h6>{item.company}</div>
+                  <div><h6>position: </h6>{item.position}</div>
+                  <div><h6>comment: </h6>{item.comment}</div>
+                </Container>
+                </Accordion.Body>
+              </AccordionItem>
+              </Container>
+            ))}
+          </Accordion>
+  
+        </Container>
       </Container>
-
-
-    </ul>
   );
 
 }
