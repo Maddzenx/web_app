@@ -42,7 +42,7 @@ class ContactDBService implements IContactService {
         else return doc;
     }
     
-    async changeStatus(id: number, status: number): Promise<Contact> {
+   /* async changeStatus(id: number, status: number): Promise<Contact> {
         const cm = await contactModel;
         await cm.updateOne({id: id},
             { status: status
@@ -52,12 +52,12 @@ class ContactDBService implements IContactService {
         if (doc === null)
             throw new Error("No document with id " + id);
         else return doc;
-    }
+    }*/
 
     async deleteContact(contactId: number): Promise<Boolean> {
         const cm = await contactModel;
         
-        await cm.findOneAndDelete({ id: (contactId) }).exec() 
+        await cm.deleteOne({ id: (contactId) }).exec() 
         
         const doc = await cm.findOne({id: contactId});
 
