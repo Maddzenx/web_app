@@ -14,16 +14,13 @@ test("A GET request to / should send a response with the list of contacts", () =
 
 class MockContactService implements IContactService {
 
-        getContact(): Promise<Contact[]> {
-            throw new Error("Method not implemented.");
+        getContact : () => Promise<Contact[]> = async () => {
+            return listOfContacts;
         }
         createContact(callListID: number, name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string): Promise<Contact> {
             throw new Error("Method not implemented.");
         }
         editContact(id: number, name: string, telephoneNumber: string): Promise<Contact> {
-            throw new Error("Method not implemented.");
-        }
-        changeStatus(id: number, status: number): Promise<Contact> {
             throw new Error("Method not implemented.");
         }
         deleteContact(id: number): Promise<Boolean> {

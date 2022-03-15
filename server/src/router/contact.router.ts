@@ -151,7 +151,7 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
     });
 
     //Changestatus
-    contactRouter.put("/:id, status", async (req: Request, res: Response) => {
+   /* contactRouter.put("/:id, status", async (req : Request, res: Response) => {
 
         try {
 
@@ -171,7 +171,11 @@ export function makeContactRouter(contactService: IContactService): Express.Expr
         } catch (e: any) {
 
             res.status(500).send(e.message);
-
+            
+            }
+            
+            });*/
+            return contactRouter;
         }
 
     });
