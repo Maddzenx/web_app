@@ -12,13 +12,12 @@ export function SideBar() {
 
     <Container fluid>
       <>
-        <Navbar bg="dark" variant="dark" expand="sm"  fixed="top">
+        <Navbar bg="dark" variant="dark" expand="sm" fixed="top">
           <Container fluid>
             <Navbar.Brand>Name</Navbar.Brand>
             <Nav className="me-auto">
-              <Nav.Link href="startPage">Dashboard</Nav.Link> 
-              <Nav.Link href="callListPage">Profile</Nav.Link>
-              <Nav.Link href="#pricing">Sign Out</Nav.Link>
+              <Nav.Link href="dashboard">Dashboard</Nav.Link>
+              <Nav.Link href="/">Sign Out</Nav.Link>
             </Nav>
           </Container>
         </Navbar>

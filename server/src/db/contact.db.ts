@@ -1,79 +1,87 @@
-import {Schema} from "mongoose";
-import {Contact, Status} from "../model/contact.interface";
+import { Schema } from "mongoose";
+import { Contact } from "../model/contact.interface";
 import { conn } from "./conn";
 
-const contactSchema : Schema = new Schema({
+const contactSchema: Schema = new Schema({
 
-        id : {
+    id: {
 
-            type : Number,
+        type: Number,
 
-            required : true,
+        required: true,
 
-            unique: true
+        unique: true
 
-        },
+    },
 
-        name : {
+    callListID: {
 
-            type : String,
+        type: Number,
 
-            required : true
+        required: true,
 
-        },
+    },
 
-        company : {
+    name: {
 
-            type : String,
-        
-            required : false
-        
-        },
-        
-        position : {
+        type: String,
 
-            type : String,
-            
-            required : false
-            
-        },
+        required: true
 
-        telephoneNumber : {
+    },
 
-            type : String,
-            
-            required : false
-            
-        },
+    company: {
 
-        email : {
+        type: String,
 
-            type : String,
-            
-            required : false
-            
-        },
+        required: false
 
-        status : {
+    },
 
-            type : Number,
-            
-            required : true
-            
-        },
+    position: {
 
-        comment : {
+        type: String,
 
-            type : String,
-            
-            required : false
-            
-        },
+        required: false
+
+    },
+
+    telephoneNumber: {
+
+        type: String,
+
+        required: false
+
+    },
+
+    email: {
+
+        type: String,
+
+        required: false
+
+    },
+
+    status: {
+
+        type: Number,
+
+        required: true
+
+    },
+
+    comment: {
+
+        type: String,
+
+        required: false
+
+    },
 
 })
 
 async function makeContactModel() {
-    return (await conn).model<Contact>("Contact", contactSchema);   
+    return (await conn).model<Contact>("Contact", contactSchema);
 }
 
 export const contactModel = makeContactModel();

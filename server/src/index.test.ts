@@ -9,10 +9,10 @@ const request : Supertest.SuperTest<Supertest.Test> = Supertest.default(app);
 
 test("End-to-end test", async () => {
 
- const res = await request.get('/contact');
+ const res = await request.get('/user/getuser');
 
- expect(res.statusCode).toEqual(200);
+ expect(res.statusCode).toEqual(201);
 
- expect(res.body).toEqual([]);
+ expect(res.body==[]).toEqual(false);
 
 });

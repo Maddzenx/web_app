@@ -1,56 +1,56 @@
-import {Schema, Model, connect} from "mongoose";
+import { Schema } from "mongoose";
 import { CallList } from "../model/callList.interface";
 import { conn } from "./conn";
 
 
-const callListSchema : Schema = new Schema({
+const callListSchema: Schema = new Schema({
 
- id : {
+   id: {
 
-   type : Number,
+      type: Number,
 
-   required : true,
+      required: true,
 
-   unique: true
+      unique: true
 
- },
+   },
 
-title : {
+   title: {
 
-   type : String,
+      type: String,
 
-   required : true
+      required: true
 
- },
+   },
 
- creator : {
+   creator: {
 
-    type : String,
-   
-    required : false
-   
- },
+      type: String,
 
- description : {
+      required: false
 
-    type : String,
-       
-    required : false
-       
-},
+   },
 
- contacts : {
+   description: {
 
-   type : Array, // ev fixa till detta men de funkade inte med array of contacts typ
+      type: String,
 
-   required : true
+      required: false
 
- }
+   },
+
+   contacts: {
+
+      type: Array,
+
+      required: true
+
+   }
 
 })
 
 async function makeCallListModel() {
-   return (await conn).model<CallList>("CallList", callListSchema);   
+   return (await conn).model<CallList>("CallList", callListSchema);
 }
 
 export const callListModel = makeCallListModel();

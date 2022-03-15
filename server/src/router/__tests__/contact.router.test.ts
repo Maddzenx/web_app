@@ -4,45 +4,52 @@ import { makeContactRouter } from "../contact.router";
 import { Express } from "express";
 import SuperTest from "supertest";
 
-
 test("A GET request to / should send a response with the list of contacts", () => {
-    const listOfContacts : Contact[] = [
-        {id: 1, name: "Contact 1", company: "", position: "", telephoneNumber: "12345", email: "yoyo@gmail.com", status: 2, comment: ""},
-        {id: 2, name: "Contact 2", company: "", position: "", telephoneNumber: "56789", email: "yoyo@gmail.com", status: 1, comment: ""}
+    const listOfContacts: Contact[] = [
+        { id: 0, callListID: 1, name: "Test1", company: "Company1", position: "Position1", telephoneNumber: "123", email: "test@mail.com", status: 2, comment: "CommentTest" },
+        { id: 0, callListID: 1, name: "Test1", company: "Company1", position: "Position1", telephoneNumber: "123", email: "test@mail.com", status: 2, comment: "CommentTest"}
     ];
 
+    class MockContactService implements IContactService {
 
-class MockContactService implements IContactService {
+        //only the getContact() test should run since we are sending a GET request. The other tests should not run, if they do, the test will fail
 
-        getContact(): Promise<Contact[]> {
-            throw new Error("Method not implemented.");
+        getContact : () => Promise<Contact[]> = async () => {
+            return listOfContacts;
         }
-        createContact(name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string): Promise<Contact> {
-            throw new Error("Method not implemented.");
+
+        createContact(callListID: number, name: string, company: string, position: string, telephoneNumber: string, email: string, comment: string): Promise<Contact> {
+            expect(0).toBe(1);
+            return null as any;
         }
-        editContact(id: number, name: string, company: string, position: string, telephoneNumber: string, email: string, status: number, comment: string): Promise<Contact> {
-            throw new Error("Method not implemented.");
+
+        editContact(id: number, name: string, telephoneNumber: string): Promise<Contact> {
+            expect(0).toBe(1);
+            return null as any;
         }
+
         changeStatus(id: number, status: number): Promise<Contact> {
-            throw new Error("Method not implemented.");
+            expect(0).toBe(1);
+            return null as any;
         }
+
         deleteContact(id: number): Promise<Boolean> {
-            throw new Error("Method not implemented.");
+            expect(0).toBe(1);
+            return null as any;
         }
-    
     }
 
-    const contacts : MockContactService = new MockContactService;
+    const contacts: MockContactService = new MockContactService;
 
-    const router : Express = makeContactRouter(contacts);
+    const router: Express = makeContactRouter(contacts);
 
-    const request : SuperTest.SuperTest<SuperTest.Test> = 
+    const request: SuperTest.SuperTest<SuperTest.Test> =
         SuperTest(router);
 
-        request.get("/").then((res) => {
-            expect(res.statusCode).toBe(200);
-            expect(res.body).toEqual(listOfContacts);
-        });
+    request.get("/").then((res) => {
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toEqual(listOfContacts);
+    });
 
 
 });
